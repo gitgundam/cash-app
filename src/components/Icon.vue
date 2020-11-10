@@ -1,7 +1,8 @@
 <template>
-  <svg>
-    <use xlink:href="#labels"></use>
+  <svg class="icon">
+    <use :xlink:href="'#'+name"></use>
   </svg>
+
 </template>
 
 <script lang="ts">
@@ -13,10 +14,16 @@ try {
   console.log(err);
 }
   export default {
-    name: "Icon"
+    name: "Icon",
+    props:['name']
 }
 </script>
 
 <style scoped lang="scss">
-
+.icon {
+  width: 2em; height: 2em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
 </style>
