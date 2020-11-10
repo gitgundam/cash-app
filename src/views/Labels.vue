@@ -1,13 +1,16 @@
 <template>
-  <div class="">
-    标签
-    <Nav/>
+  <div>
+    <Layout>
+      <div>
+        明细
+      </div>
+    </Layout>
   </div>
 </template>
 
 <script lang="ts">
 export default {
-  name: ' ',
+  name: 'labels',
   data(){
     return {
 

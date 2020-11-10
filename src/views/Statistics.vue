@@ -1,13 +1,16 @@
 <template>
-  <div class="">
-    statistics
-    <Nav/>
+  <div>
+    <Layout>
+      <div>
+        统计
+      </div>
+    </Layout>
   </div>
 </template>
 
 <script lang="ts">
 export default {
-  name: ' ',
+  name: 'statistics',
   data(){
     return {
 
