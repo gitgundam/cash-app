@@ -1,16 +1,16 @@
-import Vue from 'vue'
-import VueRouter, { RouteConfig } from 'vue-router'
+import Vue from 'vue';
+import VueRouter, {RouteConfig} from 'vue-router';
 import Labels from '@/views/Labels.vue';
 import Money from '@/views/Money.vue';
 import Statistics from '@/views/Statistics.vue';
 import NotFound from '@/views/NotFound.vue';
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes: Array<RouteConfig> = [
   {
-    path:'/',
-    redirect : '/labels'
+    path: '/',
+    redirect: '/money'
   },
   {
     path: '/labels',
@@ -24,11 +24,11 @@ const routes: Array<RouteConfig> = [
   },
   {
     path: '/statistics',
-    name:'statistics',
+    name: 'statistics',
     component: Statistics
-  },{
-    path:'*',
-    name:'404',
+  }, {
+    path: '*',
+    name: '404',
     component: NotFound
   }
   // {
@@ -39,10 +39,10 @@ const routes: Array<RouteConfig> = [
   //   // which is lazy-loaded when the route is visited.
   //   component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   // }
-]
+];
 
 const router = new VueRouter({
   routes
-})
+});
 
-export default router
+export default router;

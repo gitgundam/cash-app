@@ -1,9 +1,8 @@
 <template>
   <div>
     <Layout>
-      <div>
-        明细
-      </div>
+      1
+
     </Layout>
   </div>
 </template>
@@ -11,12 +10,10 @@
 <script lang="ts">
 export default {
   name: 'labels',
-  data(){
-    return {
-
-    }
+  data() {
+    return {};
   }
-}
+};
 </script>
 
 <style scoped lang="scss">

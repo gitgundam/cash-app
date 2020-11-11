@@ -11,12 +11,10 @@
 <script lang="ts">
 export default {
   name: 'statistics',
-  data(){
-    return {
-
-    }
+  data() {
+    return {};
   }
-}
+};
 </script>
 
 <style scoped lang="scss">
