@@ -67,7 +67,7 @@ export default {
     left: 0;
     width: 50vw;
     border-bottom: 4px solid black;
-    transition: all 1s;
+    transition: all .3s;
   }
 }
 </style>
