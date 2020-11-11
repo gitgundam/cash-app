@@ -20,10 +20,3 @@ button, input{
 :focus{
   outline: none;
 }
-%clearFix{
-  &::afetr{
-    content: '';
-    display: block;
-    clear: both;
-  }
-}

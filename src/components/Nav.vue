@@ -25,13 +25,6 @@ export default {
 <style scoped lang="scss">
 @import "~@/assets/style/helper.scss";
   nav {
-    @media (min-width: 580px) {
-      position: fixed;
-      width: 100vw;
-      bottom: 0;
-      left: 0;
-      background: white ;
-    }
     display: flex;
     box-shadow: 0 0 2px #b5b5b5;
     align-items: center;
