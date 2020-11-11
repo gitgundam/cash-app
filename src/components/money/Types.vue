@@ -24,8 +24,11 @@ export default {
   methods: {
     selectType(type) {
       this.type = type;
-      console.log( this.$refs.line.style);
+      if(type === '+'){
       this.$refs.line.style.transform = 'translateX(100%)'
+      }else{
+        this.$refs.line.style.transform = 'translateX(0)'
+      }
     }
   }
 }
@@ -46,21 +49,21 @@ export default {
     width: 50%;
     line-height: 64px;
     position: relative;
-    &.selected {
-      &::after {
-        content: '';
-        position: absolute;
-        width: 100%;
-        left: 0;
-        bottom: 0;
-        border-bottom: 4px solid #333;
-        transition: all 3s;
-      }
-    }
+    //&.selected {
+    //  &::after {
+    //    content: '';
+    //    position: absolute;
+    //    width: 100%;
+    //    left: 0;
+    //    bottom: 0;
+    //    border-bottom: 4px solid #333;
+    //    transition: all .3s;
+    //  }
+    //}
   }
   >.line{
     position: absolute;
-    top: 0;
+    bottom:  0;
     left: 0;
     width: 50vw;
     border-bottom: 4px solid black;
