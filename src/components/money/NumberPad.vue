@@ -5,7 +5,7 @@
       <button @click="inputContent">1</button>
       <button @click="inputContent">2</button>
       <button @click="inputContent">3</button>
-      <button>删除</button>
+      <button @click="remove">删除</button>
       <button @click="inputContent">4</button>
       <button @click="inputContent">5</button>
       <button @click="inputContent">6</button>
@@ -33,17 +33,32 @@ export default class Types extends Vue {
     const text = button.innerText;
     const origin = (this.$refs.origin as HTMLElement);
     if (origin.innerText === '0') {
-      if (text === '0') {return}
-      else if (text === '.') {
-        this.output = '0' + text;
+      if (text === '0') {
+        return;
+      } else if (text === '.') {
+        this.output = '0.';
+        return;
       }
-      this.output += text;
     }
+    if (this.output.includes('.') && text === '.') {
+      return;
+    }
+    this.output += text;
   }
 
   clear() {
     this.output = '';
   }
+
+  remove() {
+    if(this.output.length === 1){
+      this.output = ''
+    }else{
+      this.output = this.output.slice(0,-1)
+    }
+
+  }
+
 }
 </script>
 
