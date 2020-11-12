@@ -12,26 +12,25 @@
 
   </div>
 </template>
+<script lang="ts">
 
-<script>
-export default {
-  name: 'Types',
-  data() {
-    return {
-      type: '-',
-    };
-  },
-  methods: {
-    selectType(type) {
-      this.type = type;
-      if(type === '+'){
-      this.$refs.line.style.transform = 'translateX(100%)'
-      }else{
-        this.$refs.line.style.transform = 'translateX(0)'
-      }
+import Vue from 'vue';
+import {Component} from 'vue-property-decorator';
+
+@Component
+export default class Types extends Vue {
+  type = '-';//ts:引入data
+  selectType(type: string) {
+    this.type = type;
+    const line = (this.$refs.line as HTMLElement)
+    if (type === '+') {
+      line.style.transform = 'translateX(100%)';
+    } else {
+      line.style.transform = 'translateX(0)';
     }
   }
 }
+
 </script>
 
 <style scoped lang="scss">
@@ -42,6 +41,7 @@ export default {
   align-items: center;
   font-size: 24px;
   position: relative;
+
   > li {
     display: flex;
     justify-content: center;
@@ -49,6 +49,7 @@ export default {
     width: 50%;
     line-height: 64px;
     position: relative;
+
     //&.selected {
     //  &::after {
     //    content: '';
@@ -61,9 +62,10 @@ export default {
     //  }
     //}
   }
-  >.line{
+
+  > .line {
     position: absolute;
-    bottom:  0;
+    bottom: 0;
     left: 0;
     width: 50vw;
     border-bottom: 4px solid black;
