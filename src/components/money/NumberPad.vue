@@ -13,7 +13,7 @@
       <button @click="inputContent">7</button>
       <button @click="inputContent">8</button>
       <button @click="inputContent">9</button>
-      <button class="ok">OK</button>
+      <button  class="ok">OK</button>
       <button class="zero" @click="inputContent">0</button>
       <button @click="inputContent">.</button>
     </div>
@@ -32,6 +32,10 @@ export default class Types extends Vue {
     const button = (event.target as HTMLButtonElement);
     const text = button.innerText;
     const origin = (this.$refs.origin as HTMLElement);
+    if (this.output.length === 16) {
+      alert('最多16位数字');
+      return;
+    }
     if (origin.innerText === '0') {
       if (text === '0') {
         return;
@@ -50,14 +54,15 @@ export default class Types extends Vue {
     this.output = '';
   }
 
-  remove() {
-    if(this.output.length === 1){
-      this.output = ''
-    }else{
-      this.output = this.output.slice(0,-1)
-    }
 
+  remove() {
+    if (this.output.length === 1) {
+      this.output = '';
+    } else {
+      this.output = this.output.slice(0, -1);
+    }
   }
+
 
 }
 </script>
