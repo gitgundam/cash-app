@@ -1,42 +1,71 @@
 <template>
   <div class="tags">
     <ul class="current">
-      <li>衣</li>
-      <li>食</li>
-      <li>住</li>
-      <li>行</li>
+      <li v-for="tag in tagData"
+          :key="tag"
+          @click="toggle(tag)"
+          :class="{selected:selectedTags.indexOf(tag)>=0 }">{{ tag }}
+      </li>
     </ul>
     <div class="new">
-      <button>新增标签</button>
+      <button @click="creatTag()">新增标签</button>
     </div>
   </div>
 </template>
 
-<script>
-export default {
-  name: 'Tags',
-  data() {
-    return {};
-  },
-  components: {}
-};
+<script lang="ts">
+
+import Vue from 'vue';
+import {Component, Prop} from 'vue-property-decorator';
+
+@Component
+export default class Tags extends Vue {
+  @Prop() tagData: string[] | undefined;
+  selectedTags: string[] = [];
+
+  toggle(tag: string) {
+    const index = this.selectedTags.indexOf(tag);
+    if (index >= 0) {
+      this.selectedTags.splice(index, 1);
+    } else {
+      this.selectedTags.push(tag,);
+    }
+    this.$emit('update:value',this.selectedTags)
+  }
+
+  creatTag() {
+    const name = (window.prompt('请输入标签名') as string)
+    if (name === '') {
+      alert('文字不可为空');
+    }else if(this.tagData && this.tagData.includes(name)){
+      alert('标签名已存在')
+    }else if(this.tagData){
+      this.$emit('update:tagData',[...this.tagData,name])
+    }
+
+  }
+
+}
 </script>
 
 <style scoped lang="scss">
 @import "~@/assets/style/reset.scss";
+
 .tags {
   font-size: 14px;
   padding: 16px;
   display: flex;
   flex-direction: column;
-  $a:column;
+  $a: column;
   justify-content: flex-end;
   flex-grow: 1;
+
   > .current {
     height: $a;
     display: flex;
     overflow: scroll;
     flex-wrap: wrap;
+
     > li {
       display: flex;
       align-items: center;
@@ -45,6 +74,12 @@ export default {
       padding: 0 16px;
       border-radius: (24px/2);
       margin: 0 5px 5px 0;
+
+      &.selected {
+        background: #333333;
+        color: white;
+      }
+
     }
   }
 

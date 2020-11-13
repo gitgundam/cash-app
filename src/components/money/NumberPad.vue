@@ -13,7 +13,7 @@
       <button @click="inputContent">7</button>
       <button @click="inputContent">8</button>
       <button @click="inputContent">9</button>
-      <button  class="ok">OK</button>
+      <button  @click="ok" class="ok">OK</button>
       <button class="zero" @click="inputContent">0</button>
       <button @click="inputContent">.</button>
     </div>
@@ -47,13 +47,18 @@ export default class Types extends Vue {
     if (this.output.includes('.') && text === '.') {
       return;
     }
+    if(this.output.includes('.') && (this.output.length-this.output.lastIndexOf('.')>2)){
+      return
+    }
     this.output += text;
   }
 
   clear() {
     this.output = '';
   }
-
+ok(){
+    this.$emit('update',this.output)
+}
 
   remove() {
     if (this.output.length === 1) {
