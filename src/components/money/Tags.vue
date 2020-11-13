@@ -35,7 +35,7 @@ export default class Tags extends Vue {
 
   creatTag() {
     const name = (window.prompt('请输入标签名') as string)
-    if (name === '') {
+    if (name === ''|| name.includes(' ')) {
       alert('文字不可为空');
     }else if(this.tagData && this.tagData.includes(name)){
       alert('标签名已存在')
