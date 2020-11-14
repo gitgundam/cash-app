@@ -35,7 +35,8 @@ export default class Types extends Vue {
 
 <style scoped lang="scss">
 .types {
-  background: #c4c4c4;
+  @import "~@/assets/style/helper.scss";
+  background: $color-type-background;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -49,18 +50,6 @@ export default class Types extends Vue {
     width: 50%;
     line-height: 64px;
     position: relative;
-
-    //&.selected {
-    //  &::after {
-    //    content: '';
-    //    position: absolute;
-    //    width: 100%;
-    //    left: 0;
-    //    bottom: 0;
-    //    border-bottom: 4px solid #333;
-    //    transition: all .3s;
-    //  }
-    //}
   }
 
   > .line {
