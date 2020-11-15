@@ -2,22 +2,35 @@
   <div>
     <Layout>
       <ol>
-      <li>衣</li>
-      <li>食</li>
-      <li>住</li>
-      <li>行</li>
+        <li v-for="tag in tags" :key="tag.id">{{tag.name}}</li>
       </ol>
+      <div class="creatTag-wrapper">
+        <button class="creatTag" @click="createTag">新建标签</button>
+      </div>
+
     </Layout>
   </div>
 </template>
 
 <script lang="ts">
-export default {
-  name: 'labels',
-  data() {
-    return {};
+import Vue from 'vue'
+import {Component} from 'vue-property-decorator';
+import tagList from '@/modules/tagListModel';
+tagList.fetch()
+@Component
+export default class Labels extends Vue{
+  tags = tagList.data
+  createTag(){
+   const name  =  window.prompt('你好')
+    if(name){
+        const message = tagList.create(name)
+      if(message === '失败'){
+          window.alert('标签名重复')
+      }
+    }
   }
-};
+}
+
 </script>
 
 <style scoped lang="scss">
