@@ -2,7 +2,7 @@
   <div>
     <Layout>
       <ol>
-        <li v-for="tag in tags" :key="tag.id">{{tag.name}}</li>
+        <li v-for="tag in tags" :key="tag.id" @click="toEdit(tag)">{{tag.name}}</li>
       </ol>
       <div class="creatTag-wrapper">
         <button class="creatTag" @click="createTag">新建标签</button>
@@ -28,6 +28,15 @@ export default class Labels extends Vue{
           window.alert('标签名重复')
       }
     }
+  }
+  toEdit(tag){
+    this.$router.push({
+      name:'edit',
+      params:{
+        id:tag.id
+      }
+
+    })
   }
 }
 
