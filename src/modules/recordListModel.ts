@@ -11,6 +11,11 @@ const recordListModel = {
   },
   clone(data: RecordItem[] | RecordItem){
     JSON.parse(JSON.stringify(data))
+  },
+  create(record: RecordItem){
+    const record2: any = recordListModel.clone(record);
+    record2.created = new Date();
+    this.data.push(record2);
   }
 };
 

@@ -15,18 +15,15 @@
 <script lang="ts">
 import Vue from 'vue'
 import {Component} from 'vue-property-decorator';
-import tagList from '@/modules/tagListModel';
-tagList.fetch()
+
+
 @Component
 export default class Labels extends Vue{
-  tags = tagList.data
+  tags = window.tagList
   createTag(){
    const name  =  window.prompt('你好')
     if(name){
-        const message = tagList.create(name)
-      if(message === '失败'){
-          window.alert('标签名重复')
-      }
+      window.createTag(name)
     }
   }
   toEdit(tag: any ){
