@@ -20,6 +20,7 @@ import Tags from '@/components/money/Tags.vue';
 import FormItem from '@/components/money/FormItem.vue';
 import Types from '@/components/money/Types.vue';
 import NumberPad from '@/components/money/NumberPad.vue';
+import store from '@/store/index2';
 
 
 
@@ -29,8 +30,8 @@ import NumberPad from '@/components/money/NumberPad.vue';
   }
 })
 export default class Money extends Vue {
-  tags = window.tagList
-  recordList = window.recordList
+  tags = store.tagList
+  recordList = store.recordList
   record: RecordItem = {
     tags: [],
     notes: '',
@@ -52,7 +53,7 @@ export default class Money extends Vue {
   }
 
   saveRecode() {
-    window.createRecord(this.record)
+    store.createRecord(this.record)
   }
 
 }

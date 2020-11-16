@@ -13,6 +13,7 @@
 import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
 import FormItem from '@/components/money/FormItem.vue';
+import store from '@/store/index2';
 
 @Component({
     components: {
@@ -22,25 +23,25 @@ import FormItem from '@/components/money/FormItem.vue';
 )
 export default class Edit extends Vue {
   tag?: { id: string; name: string } = undefined;
-  created(){
+
+  created() {
     const id = this.$route.params.id;
-    const tags = window.tagList
+    const tags = store.tagList;
     this.tag = tags.filter(t => t.id === id)[0];
   }
 
   updateName(value: string) {
     const id = this.$route.params.id;
-    window.updateTag(id,value)
+    store.updateTag(id, value);
   }
 
   remove() {
     const id = this.$route.params.id;
     if (window.confirm('是否确认删除')) {
-      window.removeTag(id);
+      store.removeTag(id);
       this.$router.back();
     }
   }
-
 
 }
 

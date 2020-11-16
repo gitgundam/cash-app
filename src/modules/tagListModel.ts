@@ -28,28 +28,27 @@ const tagListModel: TagListModel = {
   },
   update(id, name) {
     const tag = this.data.filter(item => item.id === id)[0];
-    const names = this.data.map(item => item.name)
-
-    if(name === tag.name){
-      return
-    }else if(names.includes(name)){ alert(1)}
-    else{
-      if (name.length === 0){
-        return
-      }else if(name.trim().length === 0){
-        alert('标签名不能为空')
+    const names = this.data.map(item => item.name);
+    if (name === tag.name) {
+      return;
+    } else if (names.includes(name)) {
+      alert(1);
+    } else {
+      if (name.length === 0) {
+        return;
+      } else if (name.trim().length === 0) {
+        alert('标签名不能为空');
       }
-      tag.name = name.trim()
-      console.log(tag.name);
-      this.save()
+      tag.name = name.trim();
+      this.save();
     }
   },
-  remove(id){
-      const index = this.data.indexOf(this.data.filter(item => item.id === id)[0])
-      this.data.splice(index,1)
-      console.log(this.data);
-      this.save()
-  }
+  remove(id) {
+    const index = this.data.indexOf(this.data.filter(item => item.id === id)[0]);
+    this.data.splice(index, 1);
+    console.log(this.data);
+    this.save();
+  },
 
 };
 

@@ -9,14 +9,3 @@ type Tag = {
   id: string;
   name: string;
 }
-
-interface Window{
-  tagList: Tag[];
-  createTag: (name: string) => void;
-  removeTag: (id: string) => void;
-  updateTag: (id: string,value: string) => void;
-
-  recordList: RecordItem[];
-  createRecord: (record: RecordItem) => void;
-
-}

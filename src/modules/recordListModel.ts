@@ -7,15 +7,15 @@ const recordListModel = {
     return this.data
   },
   save(){
-    return window.localStorage.setItem(localStorageName, JSON.stringify(this.data));
+    window.localStorage.setItem(localStorageName, JSON.stringify(this.data));
   },
   clone(data: RecordItem[] | RecordItem){
-    JSON.parse(JSON.stringify(data))
+    return JSON.parse(JSON.stringify(data))
   },
-  create(record: RecordItem){
-    const record2: any = recordListModel.clone(record);
+  create(record: RecordItem[]){
+    const record2 = this.clone(record)
     record2.created = new Date();
-    this.data.push(record2);
+    this.data.push(record2)
     this.save()
   }
 };

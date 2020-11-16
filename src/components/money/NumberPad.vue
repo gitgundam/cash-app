@@ -13,7 +13,7 @@
       <button @click="inputContent">7</button>
       <button @click="inputContent">8</button>
       <button @click="inputContent">9</button>
-      <button  @click="ok" class="ok">ok</button>
+      <button @click="ok" class="ok">ok</button>
       <button class="zero" @click="inputContent">0</button>
       <button @click="inputContent">.</button>
     </div>
@@ -27,7 +27,6 @@ import {Component} from 'vue-property-decorator';
 @Component
 export default class Types extends Vue {
   output = '';
-
   inputContent(event: MouseEvent) {
     const button = (event.target as HTMLButtonElement);
     const text = button.innerText;
@@ -47,8 +46,8 @@ export default class Types extends Vue {
     if (this.output.includes('.') && text === '.') {
       return;
     }
-    if(this.output.includes('.') && (this.output.length-this.output.lastIndexOf('.')>2)){
-      return
+    if (this.output.includes('.') && (this.output.length - this.output.lastIndexOf('.') > 2)) {
+      return;
     }
     this.output += text;
   }
@@ -56,12 +55,13 @@ export default class Types extends Vue {
   clear() {
     this.output = '';
   }
-ok(){
-    this.$emit('update',this.output)
-    this.$emit('save',this.output)
 
-  this.clear()
-}
+  ok() {
+    this.$emit('update', this.output);
+    this.$emit('save', this.output);
+
+    this.clear();
+  }
 
   remove() {
     if (this.output.length === 1) {
@@ -70,7 +70,6 @@ ok(){
       this.output = this.output.slice(0, -1);
     }
   }
-
 
 }
 </script>
