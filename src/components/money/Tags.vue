@@ -2,9 +2,9 @@
   <div class="tags">
     <ul class="current">
       <li v-for="tag in tagData"
-          :key="tag"
+          :key="tag.id"
           @click="toggle(tag)"
-          :class="{selected:selectedTags.indexOf(tag)>=0 }">{{ tag }}
+          :class="{selected:selectedTags.indexOf(tag)>=0 }">{{ tag.name}}
       </li>
     </ul>
     <div class="new">
@@ -20,7 +20,7 @@ import {Component, Prop} from 'vue-property-decorator';
 
 @Component
 export default class Tags extends Vue {
-  @Prop() tagData: string[] | undefined;
+  @Prop( {required: true}) tagData!: string[];
   selectedTags: string[] = [];
 
   toggle(tag: string) {
@@ -40,7 +40,7 @@ export default class Tags extends Vue {
     }else if(this.tagData && this.tagData.includes(name)){
       alert('标签名已存在')
     }else if(this.tagData){
-      this.$emit('update:tagData',[...this.tagData,name])
+      this.$emit('add',name)
     }
 
   }

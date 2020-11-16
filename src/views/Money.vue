@@ -5,7 +5,9 @@
           :value.sync="record.type"></Types>
       <Tags :tag-data.sync="tags"
             @update:value="onUpdateTags"></Tags>
-      <Notes @update="onUpdateNotes"></Notes>
+      <FormItem @update:value="onUpdateNotes"
+             fileName="备注"
+             placeholder="在这里输入备注"></FormItem>
       <NumberPad @update="onUpdateNumbers" @save="saveRecode"></NumberPad>
     </Layout>
   </div>
@@ -15,20 +17,20 @@
 import Vue from 'vue';
 import {Component, Watch} from 'vue-property-decorator';
 import Tags from '@/components/money/Tags.vue';
-import Notes from '@/components/money/Notes.vue';
+import FormItem from '@/components/money/FormItem.vue';
 import Types from '@/components/money/Types.vue';
 import NumberPad from '@/components/money/NumberPad.vue';
 import recordListModel from '@/modules/recordListModel';
-import tagList from '@/modules/tagListModel';
+import tagListModel from '@/modules/tagListModel';
 
-
+const tagList = tagListModel.fetch
 @Component({
   components: {
-    Tags, Notes, Types, NumberPad,
+    Tags, FormItem, Types, NumberPad,
   }
 })
 export default class Money extends Vue {
-  tags = tagList.data;
+  tags = tagList;
   recordList = recordListModel.fetch();
   record: RecordItem = {
     tags: [],
@@ -51,8 +53,8 @@ export default class Money extends Vue {
   }
 
   saveRecode() {
-    const record2 = recordListModel.clone(this.record);
-    record2.created = new Date();
+    const record2: any = recordListModel.clone(this.record);
+    // record2.created = new Date();
     this.recordList.push(record2);
   }
 

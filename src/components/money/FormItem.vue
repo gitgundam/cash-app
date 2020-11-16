@@ -1,23 +1,25 @@
 <template>
   <div>
     <label class="notes">
-      {{value}}
-      <span class="name">备注</span>
-      <input type="text" placeholder="在这里添加备注" v-model.lazy="value"/>
-    </label>
+      <span class="name">{{fileName}}</span>
+      <input type="text" :placeholder="placeholder" :value = "value" @blur="onValueChanged($event.target.value)"
+             @keyup.enter="onValueChanged($event.target.value)"/>
+     </label>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import {Component,Watch} from 'vue-property-decorator';
+import {Component,Watch,Prop} from 'vue-property-decorator';
 
 @Component
 export default class Notes extends Vue {
-  value = '';
   @Watch('value')
-  onValueChanged(v: string){
-    this.$emit('update',v)
+  @Prop({default: ''})readonly value!: string
+  @Prop() fileName?: string
+  @Prop() placeholder?: string
+  onValueChanged(value: string){
+    this.$emit('update:value',value)
   }
 
 }

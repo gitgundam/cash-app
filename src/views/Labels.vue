@@ -29,7 +29,7 @@ export default class Labels extends Vue{
       }
     }
   }
-  toEdit(tag){
+  toEdit(tag: any ){
     this.$router.push({
       name:'edit',
       params:{
