@@ -15,12 +15,11 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import {Component, Watch} from 'vue-property-decorator';
+import {Component} from 'vue-property-decorator';
 import Tags from '@/components/money/Tags.vue';
 import FormItem from '@/components/money/FormItem.vue';
 import Types from '@/components/money/Types.vue';
 import NumberPad from '@/components/money/NumberPad.vue';
-import recordListModel from '@/modules/recordListModel';
 
 
 
@@ -31,7 +30,7 @@ import recordListModel from '@/modules/recordListModel';
 })
 export default class Money extends Vue {
   tags = window.tagList
-  recordList = recordListModel.fetch();
+  recordList = window.recordList
   record: RecordItem = {
     tags: [],
     notes: '',
@@ -53,13 +52,9 @@ export default class Money extends Vue {
   }
 
   saveRecode() {
-    recordListModel.create(this.record)
+    window.createRecord(this.record)
   }
 
-  @Watch('recordList')
-  recordListChang() {
-    recordListModel.save();
-  }
 }
 
 

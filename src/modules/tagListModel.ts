@@ -29,8 +29,7 @@ const tagListModel: TagListModel = {
   update(id, name) {
     const tag = this.data.filter(item => item.id === id)[0];
     const names = this.data.map(item => item.name)
-    console.log(tag);
-    console.log(this.data);
+
     if(name === tag.name){
       return
     }else if(names.includes(name)){ alert(1)}

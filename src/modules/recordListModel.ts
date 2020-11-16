@@ -16,6 +16,7 @@ const recordListModel = {
     const record2: any = recordListModel.clone(record);
     record2.created = new Date();
     this.data.push(record2);
+    this.save()
   }
 };
 
