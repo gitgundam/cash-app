@@ -26,13 +26,15 @@ export default {
 <style scoped lang="scss">
 @import "~@/assets/style/helper.scss";
   nav {
+    position: fixed;
+    border: 1px solid red;
     height: 45px;
-    position: relative;
     font-size: 12px;
     display: flex;
     box-shadow: 0 0 2px #b5b5b5;
     align-items: center;
     justify-content: space-around;
+
     > .items{
       padding: 2px 0;
       display: flex;

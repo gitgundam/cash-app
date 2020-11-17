@@ -1,13 +1,16 @@
 <template>
-  <div>
-    <ul class="types">
-      <li :class="value === '-'&& 'selected'"
-          @click="selectType('-')">支出
-      </li>
+  <div class="types">
+    <ul>
+
       <li :class="value === '+'&& 'selected'"
           @click="selectType('+')">收入
       </li>
+      <li :class="value === '-'&& 'selected'"
+          @click="selectType('-')">支出
+      </li>
       <li class="line" ref="line"></li>
+
+
     </ul>
 
   </div>
@@ -23,7 +26,7 @@ export default class Types extends Vue {
   selectType(value: string) {
     this.$emit('update:value',value)
     const line = (this.$refs.line as HTMLElement)
-    if (value === '+') {
+    if (value === '-') {
       line.style.transform = 'translateX(100%)';
     } else {
       line.style.transform = 'translateX(0)';
@@ -34,31 +37,47 @@ export default class Types extends Vue {
 </script>
 
 <style scoped lang="scss">
+@import "~@/assets/style/helper.scss";
+
 .types {
-  @import "~@/assets/style/helper.scss";
+  -webkit-tap-highlight-color:transparent;
+  user-select: none;
   background: $color-type-background;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  font-size: 24px;
+  font-size: 15px;
   position: relative;
-
-  > li {
+  height: 50px;
+  border-bottom: 1px solid #dedede;
+  > ul{
+    height: 65%;
     display: flex;
-    justify-content: center;
-    align-self: center;
-    width: 50%;
-    line-height: 64px;
+    width: 136px;
+    justify-content: space-around;
+    align-items: center;
+    background: #ededed;
+    border-radius: 8px;
     position: relative;
+    > li {
+      z-index: 2;
+      cursor: pointer;
+    }
+
+    > .line {
+      position: absolute;
+      left: 2px;
+      top:2px;
+      width: 66px;
+      height: 90%;
+      background: #ffffff;
+      border-radius: 7px;
+      transition: all .3s;
+      z-index: 1;
+      transform: translateX(0);
+      box-shadow: 1px 1px 4px -3px;
+    }
   }
 
-  > .line {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 50vw;
-    border-bottom: 4px solid black;
-    transition: all .3s;
-  }
 }
 </style>

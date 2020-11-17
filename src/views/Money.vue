@@ -3,12 +3,13 @@
     <Layout class-prefix="layout-content">
       <Types
           :value.sync="record.type"></Types>
+      <Output :count="count"></Output>
       <Tags :tag-data.sync="$store.state.tagList"
             @update:value="onUpdateTags"></Tags>
       <FormItem @update:value="onUpdateNotes"
              fileName="备注"
              placeholder="在这里输入备注"></FormItem>
-      <NumberPad @update="onUpdateNumbers" @save="saveRecode"></NumberPad>
+      <NumberPad @update="onUpdateNumbers" @save="saveRecode" @numberChanged="countChange" :count="count"></NumberPad>
     </Layout>
   </div>
 </template>
@@ -20,13 +21,12 @@ import Tags from '@/components/money/Tags.vue';
 import FormItem from '@/components/money/FormItem.vue';
 import Types from '@/components/money/Types.vue';
 import NumberPad from '@/components/money/NumberPad.vue';
-import store from '@/store/index2';
-
+import Output from '@/components/money/Output.vue';
 
 
 @Component({
   components: {
-    Tags, FormItem, Types, NumberPad,
+    Tags, FormItem, Types, NumberPad,Output
   },
   computed:{
     recordList(){
@@ -40,13 +40,16 @@ import store from '@/store/index2';
 
 })
 export default class Money extends Vue {
-  tags = store.tagList
   record: RecordItem = {
     tags: [],
     notes: '',
     type: '',
     amount: 0
   };
+  count = '0'
+  countChange(value: string){
+    this.count = value
+  }
   created(){
     this.$store.commit('fetchRecords')
     this.$store.commit('fetchTags')
@@ -61,13 +64,17 @@ export default class Money extends Vue {
   }
 
   onUpdateNumbers(value: string) {
+    console.log(value);
     this.record.amount = parseFloat(value) || 0;
   }
 
   saveRecode() {
     this.$store.commit('createRecords',this.record)
   }
-
+  stop(){
+    document.body.style.overflow='hidden';
+    document.addEventListener("touchmove",function(e){e.preventDefault()},false)//禁止页面滑动
+  }
 }
 
 

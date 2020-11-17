@@ -1,6 +1,5 @@
 <template>
   <div class="numberPad">
-    <div class="output" ref='origin'>{{ output || '0' }}</div>
     <div class="buttons">
       <button @click="inputContent">1</button>
       <button @click="inputContent">2</button>
@@ -22,25 +21,32 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import {Component} from 'vue-property-decorator';
+import {Component, Watch} from 'vue-property-decorator';
 
 @Component
 export default class Types extends Vue {
-  output = '';
+  output = '0'
+  @Watch('output')
+  onNumberChanged(){
+    this.$emit('numberChanged', this.output)
+  }
+
   inputContent(event: MouseEvent) {
     const button = (event.target as HTMLButtonElement);
     const text = button.innerText;
-    const origin = (this.$refs.origin as HTMLElement);
     if (this.output.length === 16) {
       alert('最多16位数字');
       return;
     }
-    if (origin.innerText === '0') {
+    if (this.output === '0') {
       if (text === '0') {
         return;
       } else if (text === '.') {
         this.output = '0.';
         return;
+      }else if('123456789'.indexOf(text) >=0 ){
+        this.output = text
+        return
       }
     }
     if (this.output.includes('.') && text === '.') {
@@ -53,7 +59,7 @@ export default class Types extends Vue {
   }
 
   clear() {
-    this.output = '';
+    this.output = '0';
   }
 
   ok() {
@@ -64,11 +70,12 @@ export default class Types extends Vue {
 
   remove() {
     if (this.output.length === 1) {
-      this.output = '';
+      this.output = '0';
     } else {
       this.output = this.output.slice(0, -1);
     }
   }
+
 
 }
 </script>
@@ -78,14 +85,7 @@ export default class Types extends Vue {
 @import "~@/assets/style/helper.scss";
 
 .numberPad {
-  .output {
-    background: transparent;
-    font-size: 36px;
-    font-family: Consolas, monospace;
-    padding: 9px 16px;
-    text-align: right;
-    box-shadow: inset 0 0 3px 1px #b5b5b5;
-  }
+
 
   .buttons {
     @extend %clearFix;

@@ -2,7 +2,7 @@
   <div>
     <Layout>
       <ol>
-        <li v-for="tag in tags" :key="tag.id" @click="toEdit(tag)">{{tag.name}}</li>
+        <li v-for="tag in $store.state.tagList" :key="tag.id" @click="toEdit(tag)">{{tag.name}}</li>
       </ol>
       <div class="creatTag-wrapper">
         <button class="creatTag" @click="createTag">新建标签</button>
@@ -15,12 +15,10 @@
 <script lang="ts">
 import Vue from 'vue'
 import {Component} from 'vue-property-decorator';
-import store from '@/store/index2';
 
 
 @Component
 export default class Labels extends Vue{
-  tags = store.tagList
   created(){
     this.$store.commit('fetchRecords')
     this.$store.commit('fetchTags')
@@ -28,7 +26,7 @@ export default class Labels extends Vue{
   createTag(){
    const name  =  window.prompt('你好')
     if(name){
-      store.createTag(name)
+      this.$store.commit('createTags',name)
     }
   }
   toEdit(tag: any ){
