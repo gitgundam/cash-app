@@ -59,7 +59,6 @@ export default class Types extends Vue {
   ok() {
     this.$emit('update', this.output);
     this.$emit('save', this.output);
-
     this.clear();
   }
 

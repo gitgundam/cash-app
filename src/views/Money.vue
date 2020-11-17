@@ -3,7 +3,7 @@
     <Layout class-prefix="layout-content">
       <Types
           :value.sync="record.type"></Types>
-      <Tags :tag-data.sync="tags"
+      <Tags :tag-data.sync="$store.state.tagList"
             @update:value="onUpdateTags"></Tags>
       <FormItem @update:value="onUpdateNotes"
              fileName="备注"
@@ -27,18 +27,30 @@ import store from '@/store/index2';
 @Component({
   components: {
     Tags, FormItem, Types, NumberPad,
+  },
+  computed:{
+    recordList(){
+      return this.$store.state.recordList
+    },
+    tagList(){
+      return this.$store.state.tagList
+    }
+
   }
+
 })
 export default class Money extends Vue {
   tags = store.tagList
-  recordList = store.recordList
   record: RecordItem = {
     tags: [],
     notes: '',
     type: '',
     amount: 0
   };
-
+  created(){
+    this.$store.commit('fetchRecords')
+    this.$store.commit('fetchTags')
+  }
   onUpdateTags(value: string[]) {
     this.record.tags = value;
   }
@@ -53,7 +65,7 @@ export default class Money extends Vue {
   }
 
   saveRecode() {
-    store.createRecord(this.record)
+    this.$store.commit('createRecords',this.record)
   }
 
 }

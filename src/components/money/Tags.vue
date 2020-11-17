@@ -17,7 +17,6 @@
 
 import Vue from 'vue';
 import {Component, Prop} from 'vue-property-decorator';
-import store from '@/store/index2';
 
 @Component
 export default class Tags extends Vue {
@@ -41,7 +40,7 @@ export default class Tags extends Vue {
     }else if(this.tagData && this.tagData.includes(name)){
       alert('标签名已存在')
     }else if(this.tagData){
-      store.createTag(name)
+      this.$store.commit('createTags',name)
     }
 
   }

@@ -21,6 +21,10 @@ import store from '@/store/index2';
 @Component
 export default class Labels extends Vue{
   tags = store.tagList
+  created(){
+    this.$store.commit('fetchRecords')
+    this.$store.commit('fetchTags')
+  }
   createTag(){
    const name  =  window.prompt('你好')
     if(name){
