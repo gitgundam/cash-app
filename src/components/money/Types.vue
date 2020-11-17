@@ -1,7 +1,7 @@
 <template>
   <div class="types">
+    <Icon @click.native="cancel" name="no"/>
     <ul>
-
       <li :class="value === '+'&& 'selected'"
           @click="selectType('+')">收入
       </li>
@@ -9,10 +9,8 @@
           @click="selectType('-')">支出
       </li>
       <li class="line" ref="line"></li>
-
-
     </ul>
-
+    <Icon name="yes"/>
   </div>
 </template>
 <script lang="ts">
@@ -23,6 +21,7 @@ import {Component, Prop} from 'vue-property-decorator';
 @Component
 export default class Types extends Vue {
   @Prop() readonly value!: string
+
   selectType(value: string) {
     this.$emit('update:value',value)
     const line = (this.$refs.line as HTMLElement)
@@ -32,8 +31,14 @@ export default class Types extends Vue {
       line.style.transform = 'translateX(0)';
     }
   }
-}
 
+  cancel(){
+    this.$router.replace('/')
+
+  }
+
+
+}
 </script>
 
 <style scoped lang="scss">
@@ -44,12 +49,17 @@ export default class Types extends Vue {
   user-select: none;
   background: $color-type-background;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   font-size: 15px;
   position: relative;
   height: 50px;
   border-bottom: 1px solid #dedede;
+  >.icon{
+    width: 32px;
+    height: 32px;
+    margin: 0 10px;
+  }
   > ul{
     height: 65%;
     display: flex;

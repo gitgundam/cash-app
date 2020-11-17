@@ -4,6 +4,7 @@
       <div>
         统计
       </div>
+      <Nav/>
     </Layout>
   </div>
 </template>

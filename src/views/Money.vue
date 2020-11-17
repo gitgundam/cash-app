@@ -2,13 +2,13 @@
   <div>
     <Layout class-prefix="layout-content">
       <Types
-          :value.sync="record.type"></Types>
+        :value.sync="record.type"></Types>
       <Output :count="count"></Output>
       <Tags :tag-data.sync="$store.state.tagList"
             @update:value="onUpdateTags"></Tags>
-      <FormItem @update:value="onUpdateNotes"
-             fileName="备注"
-             placeholder="在这里输入备注"></FormItem>
+      <!--      <FormItem @update:value="onUpdateNotes"-->
+      <!--             fileName="备注"-->
+      <!--             placeholder="在这里输入备注"></FormItem>-->
       <NumberPad @update="onUpdateNumbers" @save="saveRecode" @numberChanged="countChange" :count="count"></NumberPad>
     </Layout>
   </div>
@@ -23,21 +23,18 @@ import Types from '@/components/money/Types.vue';
 import NumberPad from '@/components/money/NumberPad.vue';
 import Output from '@/components/money/Output.vue';
 
-
 @Component({
   components: {
-    Tags, FormItem, Types, NumberPad,Output
+    Tags, FormItem, Types, NumberPad, Output
   },
-  computed:{
-    recordList(){
-      return this.$store.state.recordList
+  computed: {
+    recordList() {
+      return this.$store.state.recordList;
     },
-    tagList(){
-      return this.$store.state.tagList
+    tagList() {
+      return this.$store.state.tagList;
     }
-
   }
-
 })
 export default class Money extends Vue {
   record: RecordItem = {
@@ -46,14 +43,17 @@ export default class Money extends Vue {
     type: '',
     amount: 0
   };
-  count = '0'
-  countChange(value: string){
-    this.count = value
+  count = '0';
+
+  countChange(value: string) {
+    this.count = value;
   }
-  created(){
-    this.$store.commit('fetchRecords')
-    this.$store.commit('fetchTags')
+
+  created() {
+    this.$store.commit('fetchRecords');
+    this.$store.commit('fetchTags');
   }
+
   onUpdateTags(value: string[]) {
     this.record.tags = value;
   }
@@ -69,12 +69,15 @@ export default class Money extends Vue {
   }
 
   saveRecode() {
-    this.$store.commit('createRecords',this.record)
+    this.$store.commit('createRecords', this.record);
   }
-  stop(){
-    document.body.style.overflow='hidden';
-    document.addEventListener("touchmove",function(e){e.preventDefault()},false)//禁止页面滑动
-  }
+
+  // stop() {
+  //   document.body.style.overflow = 'hidden';
+  //   document.addEventListener('touchmove', function (e) {
+  //     e.preventDefault();
+  //   }, false);//禁止页面滑动
+  // }
 }
 
 
@@ -83,6 +86,8 @@ export default class Money extends Vue {
 
 <style lang="scss">
 .layout-content {
+  border: 1px solid red;
+  height: 40vh;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;

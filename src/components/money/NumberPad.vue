@@ -1,5 +1,8 @@
 <template>
   <div class="numberPad">
+    <FormItem @update:value="onUpdateNotes"
+              fileName="备注"
+              placeholder="在这里输入备注"></FormItem>
     <div class="buttons">
       <button @click="inputContent">1</button>
       <button @click="inputContent">2</button>
@@ -22,8 +25,11 @@
 <script lang="ts">
 import Vue from 'vue';
 import {Component, Watch} from 'vue-property-decorator';
+import FormItem from '@/components/money/FormItem.vue';
 
-@Component
+@Component({
+  components:{FormItem}
+})
 export default class Types extends Vue {
   output = '0'
   @Watch('output')
@@ -85,16 +91,27 @@ export default class Types extends Vue {
 @import "~@/assets/style/helper.scss";
 
 .numberPad {
-
+  width: 100vw;
+  position:fixed;
+  bottom: 0;
+  left: 0;
+  padding-bottom: 30px;
+  background: #3c414b;
 
   .buttons {
     @extend %clearFix;
 
     > button {
+      $border-color:#4a4f59;
       border: none;
       width: 25%;
       height: 56px;
       float: left;
+      background: #3c414b;
+      color: #fffeff;
+      font-size: 20px;
+      border-bottom: 1px solid $border-color;
+      border-right: 1px solid $border-color;
 
       &.ok {
         float: right;
@@ -105,43 +122,7 @@ export default class Types extends Vue {
         width: 25%*2;
       }
 
-      $bg: #f2f2f2;
 
-      &:nth-child(1) {
-        background: $bg;
-      }
-
-      &:nth-child(2),
-      &:nth-child(5) {
-        background: darken($bg, 4%);
-      }
-
-      &:nth-child(3),
-      &:nth-child(6),
-      &:nth-child(9) {
-        background: darken($bg, 4% * 2);
-      }
-
-      &:nth-child(4),
-      &:nth-child(7),
-      &:nth-child(10),
-      &:nth-child(12) {
-        background: darken($bg, 4% * 3);
-      }
-
-      &:nth-child(8),
-      &:nth-child(11),
-      &:nth-child(13) {
-        background: darken($bg, 4% * 4);
-      }
-
-      &:nth-child(14) {
-        background: darken($bg, 4% * 5);
-      }
-
-      &:nth-child(12) {
-        background: darken($bg, 4% * 6);
-      }
     }
   }
 }

@@ -7,7 +7,7 @@
       <div class="creatTag-wrapper">
         <button class="creatTag" @click="createTag">新建标签</button>
       </div>
-
+      <Nav/>
     </Layout>
   </div>
 </template>

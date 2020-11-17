@@ -19,31 +19,35 @@
 export default {
   data() {
     return {};
-  }
+  },
+
 };
 </script>
 
 <style scoped lang="scss">
 @import "~@/assets/style/helper.scss";
   nav {
+    -webkit-tap-highlight-color:transparent;
+    display: flex;
     position: fixed;
-    border: 1px solid red;
+    bottom: 0;
+    left: 0;
+    background: #ededed;
+    width: 100vw;
     height: 45px;
     font-size: 12px;
-    display: flex;
     box-shadow: 0 0 2px #b5b5b5;
     align-items: center;
     justify-content: space-around;
-
     > .items{
       padding: 2px 0;
       display: flex;
-
       align-items: center;
       &:nth-child(2){
         position: absolute;
         top: -15px;
         .icon{
+          color: $color-highlight;
           width: 55px;
           height: 55px;
         }
@@ -55,7 +59,7 @@ export default {
       }
 
     >.items.selected{
-      color: $color-highlight;
+      color: $color-major;
     }
 
   }
