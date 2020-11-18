@@ -1,15 +1,16 @@
 <template>
   <div class="tags">
-    <ul class="current">
-      <li v-for="tag in tagData"
-          :key="tag.id"
-          @click="toggle(tag)"
-          :class="{selected:selectedTags.indexOf(tag)>=0 }">{{ tag.name}}
-      </li>
-    </ul>
     <div class="new">
       <button @click="creatTag()">新增标签</button>
+      <ul class="current">
+        <li v-for="tag in tagData"
+            :key="tag.id"
+            @click="toggle(tag)"
+            :class="{selected:selectedTags.indexOf(tag)>=0 }">{{ tag.name }}
+        </li>
+      </ul>
     </div>
+
   </div>
 </template>
 
@@ -20,7 +21,7 @@ import {Component, Prop} from 'vue-property-decorator';
 
 @Component
 export default class Tags extends Vue {
-  @Prop( {required: true}) tagData!: string[];
+  @Prop({required: true}) tagData!: string[];
   selectedTags: string[] = [];
 
   toggle(tag: string) {
@@ -30,17 +31,17 @@ export default class Tags extends Vue {
     } else {
       this.selectedTags.push(tag,);
     }
-    this.$emit('update:value',this.selectedTags)
+    this.$emit('update:value', this.selectedTags);
   }
 
   creatTag() {
-    const name = (window.prompt('请输入标签名') as string)
-    if (name === ''|| name.includes(' ')) {
+    const name = (window.prompt('请输入标签名') as string);
+    if (name === '' || name.includes(' ')) {
       alert('文字不可为空');
-    }else if(this.tagData && this.tagData.includes(name)){
-      alert('标签名已存在')
-    }else if(this.tagData){
-      this.$store.commit('createTags',name)
+    } else if (this.tagData && this.tagData.includes(name)) {
+      alert('标签名已存在');
+    } else if (this.tagData) {
+      this.$store.commit('createTags', name);
     }
 
   }
@@ -53,45 +54,44 @@ export default class Tags extends Vue {
 
 .tags {
   font-size: 14px;
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
-  $a: column;
-  justify-content: flex-end;
-  flex-grow: 1;
-
-  > .current {
-    height: $a;
-    display: flex;
-    overflow: scroll;
-    flex-wrap: wrap;
-
-    > li {
-      display: flex;
-      align-items: center;
-      height: 24px;
-      background: #d9d9d9;
-      padding: 0 16px;
-      border-radius: (24px/2);
-      margin: 0 5px 5px 0;
-
-      &.selected {
-        background: #333333;
-        color: white;
-      }
-
-    }
-  }
-
+  position: fixed;
+  width: 100vw;
+  bottom: 300px;
+  background: white;
   > .new {
-    padding-top: 16px;
+    border-top: 1px solid #dedede;
+    display: flex;
+    justify-content: flex-start;
 
     > button {
       color: #999;
-      border: none;
+      height: 30px;
       background: transparent;
-      border-bottom: 1px solid;
-      padding: 0 3px;
+      padding: 0 8px;
+      border: none;
+    }
+
+    > .current {
+      display: flex;
+      width: 60vw;
+      flex-grow: 1;
+      overflow: scroll;
+      align-items: center;
+
+      > li {
+        display: flex;
+        align-items: center;
+        height: 24px;
+        background: #d9d9d9;
+        padding: 0 16px;
+        border-radius: (24px/2);
+        margin-right: 5px;
+
+        &.selected {
+          background: $color-highlight;
+          color: white;
+        }
+      }
     }
   }
 }

@@ -2,7 +2,9 @@
   <div>
     <label class="notes">
       <span class="name">{{fileName}}</span>
-      <input type="text" :placeholder="placeholder" :value = "value" @blur="onValueChanged($event.target.value)"
+      <input type="text" :placeholder="placeholder"
+             :value = "value"
+             @blur="onValueChanged($event.target.value)"
              @keyup.enter="onValueChanged($event.target.value)"/>
      </label>
   </div>
@@ -10,11 +12,10 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import {Component,Watch,Prop} from 'vue-property-decorator';
+import {Component,Prop} from 'vue-property-decorator';
 
 @Component
 export default class Notes extends Vue {
-  @Watch('value')
   @Prop({default: ''})readonly value!: string
   @Prop() fileName?: string
   @Prop() placeholder?: string
@@ -27,6 +28,7 @@ export default class Notes extends Vue {
 
 <style scoped lang="scss">
 .notes {
+  left: 0;
   font-size: 14px;
   background: #f5f5f5;
   padding-left: 16px;

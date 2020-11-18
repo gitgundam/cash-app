@@ -15,12 +15,10 @@ export default {
 
 <style scoped lang="scss">
 .layout-wrapper{
-  display: flex;
-  flex-direction: column;
-  border: 1px solid green;
-  height: 100vh;
   margin: 0;
+  padding: 0;
   overflow: auto;
+  height: 100vh;
 }
 .content{
   //flex-grow: 1;

@@ -23,6 +23,7 @@ export default class Types extends Vue {
   @Prop() readonly value!: string
 
   selectType(value: string) {
+    console.log(value);
     this.$emit('update:value',value)
     const line = (this.$refs.line as HTMLElement)
     if (value === '-') {
@@ -84,7 +85,7 @@ export default class Types extends Vue {
       border-radius: 7px;
       transition: all .3s;
       z-index: 1;
-      transform: translateX(0);
+      transform: translateX(100%);
       box-shadow: 1px 1px 4px -3px;
     }
   }

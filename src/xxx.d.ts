@@ -1,4 +1,5 @@
 type RecordItem = {
+  category: string;
   tags: string[];
   notes: string;
   type: string;

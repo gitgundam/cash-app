@@ -4,12 +4,14 @@
       <Types
         :value.sync="record.type"></Types>
       <Output :count="count"></Output>
+      <Category></Category>
       <Tags :tag-data.sync="$store.state.tagList"
             @update:value="onUpdateTags"></Tags>
-      <!--      <FormItem @update:value="onUpdateNotes"-->
-      <!--             fileName="备注"-->
-      <!--             placeholder="在这里输入备注"></FormItem>-->
-      <NumberPad @update="onUpdateNumbers" @save="saveRecode" @numberChanged="countChange" :count="count"></NumberPad>
+      <NumberPad @update="onUpdateNumbers"
+                 @save="saveRecode"
+                 @numberChanged="countChange"
+                 :count="count"
+                 @ValueChanged = "onUpdateNotes"></NumberPad>
     </Layout>
   </div>
 </template>
@@ -22,10 +24,11 @@ import FormItem from '@/components/money/FormItem.vue';
 import Types from '@/components/money/Types.vue';
 import NumberPad from '@/components/money/NumberPad.vue';
 import Output from '@/components/money/Output.vue';
+import Category from '@/components/money/Category.vue';
 
 @Component({
   components: {
-    Tags, FormItem, Types, NumberPad, Output
+    Tags,Category, FormItem, Types, NumberPad, Output,
   },
   computed: {
     recordList() {
@@ -38,6 +41,7 @@ import Output from '@/components/money/Output.vue';
 })
 export default class Money extends Vue {
   record: RecordItem = {
+    category: '',
     tags: [],
     notes: '',
     type: '',
@@ -60,24 +64,15 @@ export default class Money extends Vue {
 
   onUpdateNotes(value: string) {
     this.record.notes = value;
-
   }
 
   onUpdateNumbers(value: string) {
-    console.log(value);
     this.record.amount = parseFloat(value) || 0;
   }
 
   saveRecode() {
     this.$store.commit('createRecords', this.record);
   }
-
-  // stop() {
-  //   document.body.style.overflow = 'hidden';
-  //   document.addEventListener('touchmove', function (e) {
-  //     e.preventDefault();
-  //   }, false);//禁止页面滑动
-  // }
 }
 
 
@@ -86,11 +81,7 @@ export default class Money extends Vue {
 
 <style lang="scss">
 .layout-content {
-  border: 1px solid red;
-  height: 40vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
+  height: calc(100vh - 330px);
 }
 </style>
 <style scoped lang="scss">

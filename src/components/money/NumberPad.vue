@@ -1,6 +1,6 @@
 <template>
   <div class="numberPad">
-    <FormItem @update:value="onUpdateNotes"
+    <FormItem @update:value="changeValue"
               fileName="备注"
               placeholder="在这里输入备注"></FormItem>
     <div class="buttons">
@@ -32,9 +32,18 @@ import FormItem from '@/components/money/FormItem.vue';
 })
 export default class Types extends Vue {
   output = '0'
+  value=''
   @Watch('output')
   onNumberChanged(){
     this.$emit('numberChanged', this.output)
+  }
+  @Watch('value')
+  onValueChanged(){
+    this.$emit('ValueChanged',this.value)
+  }
+
+  changeValue(value){
+    this.value = value
   }
 
   inputContent(event: MouseEvent) {

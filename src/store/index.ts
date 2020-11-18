@@ -7,7 +7,7 @@ const store = new Vuex.Store({
   state: {
     recordList: [] as RecordItem[],
     tagList: [] as Tag[],
-    tag: {} as Tag
+    tag: {} as Tag,
   },
   mutations: {
     fetchRecords(state) {
