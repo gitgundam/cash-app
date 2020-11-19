@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import creatId from '@/lib/creatId';
 
 Vue.use(Vuex);
 
@@ -16,6 +17,7 @@ const store = new Vuex.Store({
     createRecords(state, record) {
       const record2: RecordItem = JSON.parse(JSON.stringify(record));
       record2.createdAt = new Date();
+      record2.id = creatId()
       state.recordList.push(record2);
       store.commit('saveRecords');
     },

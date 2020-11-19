@@ -10,7 +10,7 @@
       </li>
       <li class="line" ref="line"></li>
     </ul>
-    <Icon name="yes"/>
+    <Icon @click.native="ok" name="yes" />
   </div>
 </template>
 <script lang="ts">
@@ -21,9 +21,8 @@ import {Component, Prop} from 'vue-property-decorator';
 @Component
 export default class Types extends Vue {
   @Prop() readonly value!: string
-
+  @Prop()  readonly count?: string
   selectType(value: string) {
-    console.log(value);
     this.$emit('update:value',value)
     const line = (this.$refs.line as HTMLElement)
     if (value === '-') {
@@ -35,9 +34,11 @@ export default class Types extends Vue {
 
   cancel(){
     this.$router.replace('/')
+  }
+  ok(){
+    this.$emit('save', 'ok');
 
   }
-
 
 }
 </script>

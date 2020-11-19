@@ -42,7 +42,7 @@ export default class Types extends Vue {
     this.$emit('ValueChanged',this.value)
   }
 
-  changeValue(value){
+  changeValue(value: string){
     this.value = value
   }
 

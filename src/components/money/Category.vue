@@ -1,8 +1,14 @@
 <template>
   <div class="category">
-    <ul>
+    <ul v-if="this.type === '-' ">
       <li v-for="(item,index) in payEvent" :key="item" @click="isActive(index)">
-        <Icon :name = "item" :class="{active: index === current}"></Icon>
+        <Icon :name = "item" :class="{active: index === iconCurrent}"></Icon>
+        <span>{{item}}</span>
+      </li>
+    </ul>
+    <ul v-else>
+      <li v-for="(item,index) in earnEvent" :key="item" @click="isActive(index)">
+        <Icon :name = "item" :class="{active: index === iconCurrent}"></Icon>
         <span>{{item}}</span>
       </li>
     </ul>
@@ -11,15 +17,18 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import {Component} from 'vue-property-decorator';
+import {Component, Prop} from 'vue-property-decorator';
 
 @Component
 export default class Category extends Vue {
-  payEvent = ['吃喝',"交通","买菜","孩子","服饰鞋包","化妆护肤","日用品","红包","话费","娱乐","医疗"]
-  earnEvent =[]
+  @Prop() readonly payEvent!: string[]
+  @Prop() readonly earnEvent!: string[]
+  @Prop() readonly type!: string
+  @Prop() readonly iconCurrent!: number
+
   current = 0
-  isActive(index){
-    this.current = index
+  isActive(index: number){
+    this.$emit('update:iconCurrent',index)
   }
 }
 </script>
@@ -44,6 +53,8 @@ export default class Category extends Vue {
        font-size: 13px;
        margin-bottom: 10px;
        >.icon{
+         user-select: none;
+         -webkit-tap-highlight-color:transparent;
          cursor: pointer;
          margin: 10px 0 ;
          padding: 5px;

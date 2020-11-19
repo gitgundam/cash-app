@@ -13,6 +13,7 @@ Vue.config.productionTip = false;
 Vue.component('Nav', Nav);
 Vue.component('Layout', Layout);
 Vue.component('Icon', Icon);
+Vue.component('Header', Header);
 
 
 new Vue({
