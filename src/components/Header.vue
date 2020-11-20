@@ -1,6 +1,6 @@
 <template>
   <div class="header">
-    <div class="content" :class="`${classPrefix}`-item">
+    <div class="content" :class="`${classPrefix}`">
       <slot></slot>
     </div>
   </div>
@@ -21,8 +21,8 @@ export default class Header extends Vue {
 @import "~@/assets/style/helper.scss";
 
   .header{
-    height: 20vh;
-    width: 100vw;
+    margin: 0;
+    bottom: 0;
     background: $color-major;
   }
 </style>

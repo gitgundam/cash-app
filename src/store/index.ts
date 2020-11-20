@@ -16,7 +16,7 @@ const store = new Vuex.Store({
     },
     createRecords(state, record) {
       const record2: RecordItem = JSON.parse(JSON.stringify(record));
-      record2.createdAt = new Date();
+      record2.createdAt = new Date().toISOString();
       record2.id = creatId()
       state.recordList.push(record2);
       store.commit('saveRecords');

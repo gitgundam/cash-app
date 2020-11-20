@@ -2,7 +2,7 @@
   <div class="Edit">
     <Layout>
       <FormItem  @update:value="updateName"
-                fileName="标签名" placeholder="在这里编辑标签名"/>
+                fileName="备注" placeholder="在这里输入备注"/>
       <button @click="remove">删除</button>
     </Layout>
   </div>

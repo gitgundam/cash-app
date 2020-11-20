@@ -1,10 +1,14 @@
 <template>
   <div>
     <Layout>
-      <Header classPrefix="label"></Header>
+      <Header classPrefix="label">
+      </Header>
       <ul>
-        <li v-for="item in recordList" :key="item.id" @click="toEdit(item)">
-          {{ item.id }}
+        <li v-for="(group,key,index) in result" :key="index">
+          <h3>{{key}}</h3>
+          <ol>
+            <li v-for="item in group" :key="item.id" @click="toEdit(item)">{{item.id}}</li>
+          </ol>
         </li>
       </ul>
 
@@ -27,7 +31,20 @@ export default class Labels extends Vue {
     return this.$store.state.recordList;
   }
 
-  created() {
+  get result() {
+    const hash = {}
+    for(let i =0;i<this.recordList.length;i++){
+      const [date,time] = this.recordList[i].createdAt.split('T')
+      console.log(date);
+      hash[date] = hash[date] || []
+      console.log(hash[date]);
+      hash[date].push(this.recordList[i])
+    }
+    console.log(hash);
+    return hash
+  }
+
+  beforeCreate() {
     this.$store.commit('fetchRecords');
     this.$store.commit('fetchTags');
   }
@@ -51,6 +68,9 @@ export default class Labels extends Vue {
 }
 </script>
 
-<style scoped lang="scss">
-
+<style lang="scss">
+.label {
+  height: 20vh;
+  width: 100vw;
+}
 </style>
