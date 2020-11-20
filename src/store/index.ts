@@ -64,6 +64,10 @@ const store = new Vuex.Store({
       const index = state.tagList.indexOf(state.tagList.filter(item => item.id === id)[0]);
       state.tagList.splice(index, 1);
       store.commit('saveTags')
+    },
+    editLabels(state,id){
+      const record = state.recordList.filter(item => item.id === id)[0];
+      console.log(record);
     }
   },
   actions: {},

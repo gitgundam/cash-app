@@ -17,8 +17,8 @@ export default {
 .layout-wrapper{
   margin: 0;
   padding: 0;
-  overflow: auto;
-  height: 100vh;
+  overflow: scroll;
+  height: calc(100vh - 45px);
 }
 .content{
   //flex-grow: 1;

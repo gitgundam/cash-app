@@ -1,20 +1,22 @@
 <template>
-  <div>
+  <div class="labels">
     <Layout>
-      <Header classPrefix="label">
+      <Header classPrefix="header">
+        <h3 class="money">{{ money }}</h3>
       </Header>
-      <ul>
+      <ul class="title">
         <li v-for="(group,key,index) in result" :key="index">
-          <h3>{{key}}</h3>
-          <ol>
-            <li v-for="item in group" :key="item.id" @click="toEdit(item)">{{item.id}}</li>
+          <h5>{{ key }}</h5>
+          <ol class="content">
+            <li v-for="item in group" :key="item.id" @click="toEdit(item)">
+              <Icon :name="item.category"></Icon>
+              <span>{{ item.category }}</span>
+              <span class="amount">{{ item.amount }}</span>
+            </li>
           </ol>
         </li>
       </ul>
 
-      <div class="creatTag-wrapper">
-        <button class="creatTag" @click="createTag">新建标签</button>
-      </div>
       <Nav/>
     </Layout>
   </div>
@@ -26,22 +28,45 @@ import {Component,} from 'vue-property-decorator';
 
 @Component
 export default class Labels extends Vue {
+  get money() {
+    const a = [];
+    const b = [];
+    for (let i = 0; i < this.recordList.length; i++) {
+      const type = this.recordList[i].type;
+      const amount = this.recordList[i].amount;
+      if (type === '-') {
+        a.push(amount);
+      } else {
+        b.push(amount);
+      }
+    }
+    let pay = 0;
+    let earn = 0;
+    if (a.length > 0) {
+      pay = a.reduce((a, b) => a + b);
+    }
+    if (b.length > 0) {
+      earn = b.reduce((a, b) => a + b);
+    }
+
+    return `支出:¥ ${pay} | 收入:¥ ${earn}`;
+  }
 
   get recordList() {
     return this.$store.state.recordList;
   }
 
   get result() {
-    const hash = {}
-    for(let i =0;i<this.recordList.length;i++){
-      const [date,time] = this.recordList[i].createdAt.split('T')
-      console.log(date);
-      hash[date] = hash[date] || []
-      console.log(hash[date]);
-      hash[date].push(this.recordList[i])
+    type hash = {date}
+    const hash = {};
+    for (let i = 0; i < this.recordList.length; i++) {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const [date, time] = this.recordList[i].createdAt.split('T');
+      hash[date] = hash[date] || [];
+      hash[date].push(this.recordList[i]);
     }
     console.log(hash);
-    return hash
+    return hash;
   }
 
   beforeCreate() {
@@ -49,13 +74,6 @@ export default class Labels extends Vue {
     this.$store.commit('fetchTags');
   }
 
-  createTag() {
-    console.log(this.recordList);
-    // const name  =  window.prompt('你好')
-    //  if(name){
-    //    this.$store.commit('createTags',name)
-    //  }
-  }
 
   toEdit(item: any) {
     this.$router.push({
@@ -69,8 +87,59 @@ export default class Labels extends Vue {
 </script>
 
 <style lang="scss">
-.label {
-  height: 20vh;
+.header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: start;
+  height: 10vh;
   width: 100vw;
+}
+</style>
+<style lang="scss" scoped>
+@import "~@/assets/style/helper.scss";
+
+.labels {
+  .money {
+    margin-bottom: 5px;
+    margin-left: 10px;
+    color: white;
+    font-size: 25px;
+  }
+
+  .title {
+    > li {
+      > h5 {
+        background: #f7f8f8;
+        padding: 5px;
+      }
+
+      .content {
+        > li {
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          margin: 0 10px;
+          border-bottom: 1px solid #dedede;
+          position: relative;
+
+          .icon {
+            margin: 10px 5px;
+            padding: 5px;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            color: white;
+            background: $color-highlight;
+          }
+          .amount{
+            position: absolute;
+            right: 10px;
+
+          }
+        }
+      ;
+      }
+    }
+  }
 }
 </style>

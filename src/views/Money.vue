@@ -36,7 +36,7 @@ import Category from '@/components/money/Category.vue';
   }
 })
 export default class Money extends Vue {
-  record: RecordItem = {
+  record: RecordItemOrigin = {
     category: '吃喝',
     tags: [],//
     notes: '',
