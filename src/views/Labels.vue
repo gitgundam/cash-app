@@ -57,7 +57,7 @@ export default class Labels extends Vue {
   }
 
   get result() {
-    type hash = {date}
+    type hash = {date: any}
     const hash = {};
     for (let i = 0; i < this.recordList.length; i++) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
