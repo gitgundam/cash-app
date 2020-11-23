@@ -4,9 +4,15 @@
       <Header classPrefix="header">
         <h3 class="money">{{ money }}</h3>
       </Header>
-      <ul class="title">
+      <ul class="record">
         <li v-for="(group,index) in groupedList" :key="index">
-          <h5>{{group.title}}</h5>
+          <div class="title">
+            <span>{{ group.title }}</span>
+            <div class="total">
+              <span class="earn">收入:¥ {{ group.totalEarn }}</span>
+              <span class="pay">支出:¥ {{ group.totalPay }}</span>
+            </div>
+          </div>
           <ol class="content">
             <li v-for="item in group.items" :key="item.id" @click="toEdit(item)">
               <Icon :name="item.category"></Icon>
@@ -56,38 +62,17 @@ export default class Labels extends Vue {
     return this.$store.state.recordList;
   }
 
-  created(){
-    const {recordList} = this
-    if (recordList.length === 0){
-      return []
-    }
-    const newRecordList = JSON.parse(JSON.stringify(recordList))
-    const newList = newRecordList.sort((a: { createdAt: string}, b: { createdAt: string})=>Date.parse(b.createdAt) - Date.parse(a.createdAt))
-    if(newList.length === 0){return []}
-    const result = [{title:newList[0].createdAt.split('T')[0],items:[newList[0]] }]
-    for(let i =1;i<newList.length;i++){
-      const current = newList[i]
-      const last = result[result.length-1]
-      if(current.createdAt.split('T')[0] === last.title.split('T')[0]){
-        last.items.push(current)
-      }else{
-        result.push({title: current.createdAt.split('T')[0],items:[newList[i]]})
-      }
-    }
-    console.log(result);
-
-  }
-
 
   get groupedList() {
     const {recordList} = this
+    type Result = [{title: string ;items: RecordItem[];totalPay?: number;totalEarn?: number}]
     if (recordList.length === 0){
       return []
     }
     const newRecordList = JSON.parse(JSON.stringify(recordList))
     const newList = newRecordList.sort((a: { createdAt: string}, b: { createdAt: string})=>Date.parse(b.createdAt) - Date.parse(a.createdAt))
     if(newList.length === 0){return []}
-    const result = [{title:newList[0].createdAt.split('T')[0],items:[newList[0]] }]
+    const result: Result = [{title:newList[0].createdAt.split('T')[0],items:[newList[0]] }]
     for(let i =1;i<newList.length;i++){
       const current = newList[i]
       const last = result[result.length-1]
@@ -96,6 +81,10 @@ export default class Labels extends Vue {
       }else{
         result.push({title: current.createdAt.split('T')[0],items:[newList[i]]})
       }
+    }
+    for (let i = 0;i< result.length;i++){
+      result[i].totalPay = result[i].items.filter(item=>item.type === '-').reduce((sum,item)=>sum+item.amount,0)
+      result[i].totalEarn = result[i].items.filter(item=>item.type === '+').reduce((sum,item)=>sum+item.amount,0)
     }
     return result
   }
@@ -137,13 +126,26 @@ export default class Labels extends Vue {
     font-size: 25px;
   }
 
-  .title {
+  .record {
     > li {
-      > h5 {
+      .title{
         background: #f7f8f8;
-        padding: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 13px;
+        color: #a4a4a4;
+        > span {
+          padding: 5px;
+        }
+        .total{
+          display: flex;
+          align-items: center;
+          >span{
+            padding: 0 8px;
+          }
+        }
       }
-
       .content {
         > li {
           display: flex;
