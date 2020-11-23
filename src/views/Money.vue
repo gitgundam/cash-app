@@ -65,7 +65,6 @@ export default class Money extends Vue {
   countChange(value: string) {
     this.count = value;
     this.record.amount = parseFloat(value)
-    console.log(this.record.amount);
   }
 
   created() {

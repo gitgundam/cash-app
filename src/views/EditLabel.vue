@@ -4,21 +4,18 @@
       <Header classPrefix="header">
         <Icon name="返回" class="back" @click.native="back"></Icon>
         <Icon :name="record.category" class="category"></Icon>
+        <Icon name="删除" @click.native="remove" class="remove"></Icon>
       </Header>
       <ul class="content">
-        <li><span>类型</span>{{record.category}}</li>
-        <li><span>金额</span>{{record.amount}}</li>
-        <li><span>日期</span>{{record.createdAt | setTime(record.createdAt)}}</li>
+        <li><span>类型</span>{{ record.category || 0}}</li>
+        <li><span>金额</span>{{ record.amount }}</li>
+        <li><span>日期</span>{{ record.createdAt | setTime(record.createdAt) }}</li>
         <li><span>备注</span>
           <label>
             <input type="text" placeholder="请输入备注" class="notes">
           </label>
-
         </li>
-
       </ul>
-
-      <button @click="remove">删除</button>
     </Layout>
   </div>
 </template>
@@ -32,42 +29,42 @@ import FormItem from '@/components/money/FormItem.vue';
     components: {
       FormItem
     },
-  filters:{
-    setTime(time: string){
-      console.log(time)
-      return time.split('T')[0]
+    filters: {
+      setTime(time: string) {
+        return time.split('T')[0];
+      }
     }
   }
-  }
 )
-export default class Edit extends Vue {
-  created() {
-    this.$store.commit('fetchRecords')
-  }
-  get tag(){
-    return this.$store.state.tag
+export default class EditLabel extends Vue {
+  beforeCreate() {
+    this.$store.commit('fetchRecords');
   }
 
-  get record(){
-    const id =this.$route.params.id
-    return this.$store.state.recordList.filter((item: { id: string}) => item.id = id)[0]
+  get recordList() {
+    return this.$store.state.recordList;
   }
 
-  back(){
-    this.$router.replace('/')}
+  get record() {
+    const id = parseInt(this.$route.params.id);
+    return this.recordList.find(((item: { id: number }) => item.id === id));
+  }
 
+  back() {
+    this.$router.replace('/');
+  }
 
   updateName(name: string) {
     const id = this.$route.params.id;
-    this.$store.state.tag.name = name
-    this.$store.commit('updateTags', { id, name })
+    this.$store.state.tag.name = name;
+    this.$store.commit('updateTags', {id, name});
   }
 
   remove() {
-    const id = this.$route.params.id;
+    const id = parseInt(this.$route.params.id);
     if (window.confirm('是否确认删除')) {
-      this.$store.commit('remove',id)
-      this.$router.back();
+      this.$store.commit('remove', id);
+      this.$router.replace('/');
     }
   }
 
@@ -80,46 +77,57 @@ export default class Edit extends Vue {
 @import "~@/assets/style/helper.scss";
 
 
-  .edit{
-    ::v-deep .header{
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-        .back{
-          width: 32px;
-          height: 32px;
-          position: absolute;
-          left: 10px;
-        }
-      .category{
-        margin: 5px 5px;
-        padding: 5px;
-        border-radius: 50%;
-        width: 45px;
-        height: 45px;
-        color: white;
-        background: $color-highlight;
-      }
+.edit {
+  ::v-deep .header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+    .back {
+      width: 32px;
+      height: 32px;
+      position: absolute;
+      left: 15px;
     }
-    .content{
-      margin: 10px;
-      >li{
-        display: flex;
-        justify-self: center;
-        align-items: center;
+    .category {
+      margin: 5px 5px;
+      padding: 5px;
+      border-radius: 50%;
+      width: 45px;
+      height: 45px;
+      color: white;
+      background: $color-highlight;
+    }
+    .remove{
+      width: 32px;
+      height: 32px;
+      position: absolute;
+      right:15px;
+    }
+  }
+
+  .content {
+    margin: 10px;
+
+    > li {
+      display: flex;
+      justify-self: center;
+      align-items: center;
+      height: 46px;
+      border-bottom: 1px solid #dedede;
+
+      > span {
+        margin-right: 20px;
+      }
+
+      .notes {
         height: 46px;
-        border-bottom: 1px solid #dedede;
-        >span{
-          margin-right: 20px;
-        }
-        .notes{
-          height: 46px;
-          flex-grow: 1;
-          border: none;
-          background: transparent;
-        }
+        flex-grow: 1;
+        border: none;
+        background: transparent;
       }
     }
   }
+}
 </style>

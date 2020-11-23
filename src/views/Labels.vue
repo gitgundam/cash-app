@@ -65,7 +65,6 @@ export default class Labels extends Vue {
       hash[date] = hash[date] || [];
       hash[date].push(this.recordList[i]);
     }
-    console.log(hash);
     return hash;
   }
 
