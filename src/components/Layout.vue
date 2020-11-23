@@ -17,7 +17,7 @@ export default {
 .layout-wrapper{
   margin: 0;
   padding: 0;
-  overflow: scroll;
+  overflow: hidden;
   height: calc(100vh - 45px);
 }
 .content{
