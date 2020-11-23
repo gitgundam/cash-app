@@ -5,10 +5,10 @@
         <h3 class="money">{{ money }}</h3>
       </Header>
       <ul class="title">
-        <li v-for="(group,key,index) in result" :key="index">
-          <h5>{{ key }}</h5>
+        <li v-for="(group,index) in groupedList" :key="index">
+          <h5>{{group.title}}</h5>
           <ol class="content">
-            <li v-for="item in group" :key="item.id" @click="toEdit(item)">
+            <li v-for="item in group.items" :key="item.id" @click="toEdit(item)">
               <Icon :name="item.category"></Icon>
               <span>{{ item.category }}</span>
               <span class="amount">{{ item.amount }}</span>
@@ -56,16 +56,48 @@ export default class Labels extends Vue {
     return this.$store.state.recordList;
   }
 
-  get result() {
-    type hash = {date: any}
-    const hash = {};
-    for (let i = 0; i < this.recordList.length; i++) {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const [date, time] = this.recordList[i].createdAt.split('T');
-      hash[date] = hash[date] || [];
-      hash[date].push(this.recordList[i]);
+  created(){
+    const {recordList} = this
+    if (recordList.length === 0){
+      return []
     }
-    return hash;
+    const newRecordList = JSON.parse(JSON.stringify(recordList))
+    const newList = newRecordList.sort((a: { createdAt: string}, b: { createdAt: string})=>Date.parse(b.createdAt) - Date.parse(a.createdAt))
+    if(newList.length === 0){return []}
+    const result = [{title:newList[0].createdAt.split('T')[0],items:[newList[0]] }]
+    for(let i =1;i<newList.length;i++){
+      const current = newList[i]
+      const last = result[result.length-1]
+      if(current.createdAt.split('T')[0] === last.title.split('T')[0]){
+        last.items.push(current)
+      }else{
+        result.push({title: current.createdAt.split('T')[0],items:[newList[i]]})
+      }
+    }
+    console.log(result);
+
+  }
+
+
+  get groupedList() {
+    const {recordList} = this
+    if (recordList.length === 0){
+      return []
+    }
+    const newRecordList = JSON.parse(JSON.stringify(recordList))
+    const newList = newRecordList.sort((a: { createdAt: string}, b: { createdAt: string})=>Date.parse(b.createdAt) - Date.parse(a.createdAt))
+    if(newList.length === 0){return []}
+    const result = [{title:newList[0].createdAt.split('T')[0],items:[newList[0]] }]
+    for(let i =1;i<newList.length;i++){
+      const current = newList[i]
+      const last = result[result.length-1]
+      if(current.createdAt.split('T')[0] === last.title.split('T')[0]){
+        last.items.push(current)
+      }else{
+        result.push({title: current.createdAt.split('T')[0],items:[newList[i]]})
+      }
+    }
+    return result
   }
 
   beforeCreate() {
