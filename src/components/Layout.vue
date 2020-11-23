@@ -20,7 +20,4 @@ export default {
   overflow: hidden;
   height: calc(100vh - 45px);
 }
-.content{
-  //flex-grow: 1;
-}
 </style>

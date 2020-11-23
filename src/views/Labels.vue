@@ -4,7 +4,12 @@
       <Header classPrefix="header">
         <h3 class="money">{{ money }}</h3>
       </Header>
-      <ul class="record">
+      <div class="null" v-if="recordList[0] === undefined">
+        <Icon name="null" ></Icon>
+        <span>还没有账单,快去记账吧</span>
+      </div>
+      
+      <ul class="record" v-else>
         <li v-for="(group,index) in groupedList" :key="index">
           <div class="title">
             <span>{{ group.title }}</span>
@@ -34,6 +39,7 @@ import {Component,} from 'vue-property-decorator';
 
 @Component
 export default class Labels extends Vue {
+
   get money() {
     const a = [];
     const b = [];
@@ -119,6 +125,8 @@ export default class Labels extends Vue {
 @import "~@/assets/style/helper.scss";
 
 .labels {
+position: relative;
+
   .money {
     margin-bottom: 5px;
     margin-left: 10px;
@@ -174,5 +182,21 @@ export default class Labels extends Vue {
       }
     }
   }
+  .null{
+    color: #a4a4a4;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    bottom: 50vh;
+    .icon{
+      width: 100px;
+      height: 100px;
+      
+    }
+  }
+  
 }
 </style>
