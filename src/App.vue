@@ -12,10 +12,9 @@ body{
   font-family: $font-hei;
   color: #333;
   font-size: 16px;
-}
-
-#app{
   max-width: 500px;
   margin: 0 auto;
+  position: relative;
 }
+
 </style>

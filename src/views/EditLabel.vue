@@ -76,10 +76,13 @@ export default class EditLabel extends Vue {
 .edit {
   ::v-deep .header {
     display: flex;
+    width: 100%;
     justify-content: center;
     align-items: center;
     position: relative;
-
+    background: #ededed;
+    box-shadow: 1px 0 1px 1px #dedede;
+  ;
     .back {
       width: 32px;
       height: 32px;

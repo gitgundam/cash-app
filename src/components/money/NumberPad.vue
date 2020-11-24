@@ -100,6 +100,11 @@ export default class Types extends Vue {
 @import "~@/assets/style/helper.scss";
 
 .numberPad {
+  @media screen and (max-width: 500px){
+    position: fixed;
+    bottom: 0;
+    left: 0;
+  }
   position:absolute;
   width: 100%;
   bottom: 0;

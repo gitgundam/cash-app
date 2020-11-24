@@ -27,6 +27,11 @@ export default {
 <style scoped lang="scss">
 @import "~@/assets/style/helper.scss";
   nav {
+    @media screen and (max-width: 500px){
+      position: fixed;
+      bottom: 0;
+      left: 0;
+    }
     -webkit-tap-highlight-color:transparent;
     display: flex;
     position: absolute;

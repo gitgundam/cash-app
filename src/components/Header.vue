@@ -23,6 +23,6 @@ export default class Header extends Vue {
   .header{
     margin: 0;
     bottom: 0;
-    background: $color-major;
+    z-index: 10;
   }
 </style>

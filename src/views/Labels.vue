@@ -4,12 +4,11 @@
       <Header classPrefix="header">
         <h3 class="money">{{ money }}</h3>
       </Header>
-      <div class="null" v-if="recordList[0] === undefined">
-        <Icon name="null" ></Icon>
-        <span>还没有账单,快去记账吧</span>
-      </div>
-      
-      <ul class="record" v-else>
+      <ul class="record">
+        <li class="null" v-if="recordList[0] === undefined">
+          <Icon name="null" ></Icon>
+          <span>还没有账单,快去记账吧</span>
+        </li>
         <li v-for="(group,index) in groupedList" :key="index">
           <div class="title">
             <span>{{ group.title }}</span>
@@ -112,33 +111,49 @@ export default class Labels extends Vue {
 }
 </script>
 
-<style lang="scss">
-.header {
-  display: flex;
-  align-items: flex-end;
-  justify-content: start;
-  height: 10vh;
-  width: 100%;
-}
-</style>
 <style lang="scss" scoped>
 @import "~@/assets/style/helper.scss";
 
 .labels {
-position: relative;
   ::v-deep .layout-content{
     display: flex;
     flex-direction: column;
     height: calc(100% - 45px);
-  .money {
-    margin-bottom: 5px;
-    margin-left: 10px;
-    color: white;
-    font-size: 25px;
-  }
-
+    margin-top: 20vh;
+     .header {
+       position: absolute;
+       top: 0;
+       left: 0;
+       width: 100%;
+       height: 20vh;
+       background: #5dcdbb;
+      .money {
+        margin-bottom: 5px;
+        margin-left: 10px;
+        color: white;
+        font-size: 25px;
+      }
+    }
   .record {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    .null{
+      color: #a4a4a4;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      .icon{
+        width: 100px;
+        height: 100px;
+      }
+    }
     > li {
+      &:last-child{
+        margin-bottom: 45px;
+      }
       .title{
         background: #f7f8f8;
         display: flex;
@@ -158,6 +173,8 @@ position: relative;
         }
       }
       .content {
+        &:last-child{
+        }
         > li {
           display: flex;
           justify-content: flex-start;
@@ -192,21 +209,7 @@ position: relative;
       }
     }
   }
-  .null{
-    color: #a4a4a4;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    width: 100%;
-    bottom: 50vh;
-    .icon{
-      width: 100px;
-      height: 100px;
-      
-    }
-  }
+
   }
 }
 </style>

@@ -9,8 +9,6 @@
                 :earnEvent="earnEvent"
                 :type = 'record.type'
                 :icon-current.sync="iconIndex"></Category>
-      <Tags :tag-data.sync="$store.state.tagList"
-            @update:value="onUpdateTags"></Tags>
       <NumberPad @update="onUpdateNumbers"
                  @save="saveRecode"
                  @numberChanged="countChange"
@@ -77,9 +75,6 @@ export default class Money extends Vue {
     this.$store.commit('fetchTags');
   }
 
-  onUpdateTags(value: string[]) {
-    this.record.tags = value;
-  }
 
   onUpdateNotes(value: string) {
     this.record.notes = value;
