@@ -50,6 +50,11 @@ export default class Money extends Vue {
   @Watch('record.type')
   typeChanged(){
     this.iconIndex = 0
+    if (this.record.type === '-'){
+      this.record.category = this.payEvent[this.iconIndex]
+    }else if(this.record.type === '+'){
+      this.record.category = this.earnEvent[this.iconIndex]
+    }
   }
   @Watch('iconIndex')
   categoryChanged(){

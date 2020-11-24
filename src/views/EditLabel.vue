@@ -10,11 +10,7 @@
         <li><span>类型</span>{{ record.category}}</li>
         <li><span>金额</span>{{ record.amount }}</li>
         <li><span>日期</span>{{ record.createdAt | setTime(record.createdAt) }}</li>
-        <li><span>备注</span>
-          <label>
-            <input type="text" placeholder="请输入备注" class="notes">
-          </label>
-        </li>
+        <li><span>备注</span>{{record.notes|| "无备注"}}</li>
       </ul>
     </Layout>
   </div>
@@ -119,13 +115,6 @@ export default class EditLabel extends Vue {
 
       > span {
         margin-right: 20px;
-      }
-
-      .notes {
-        height: 46px;
-        flex-grow: 1;
-        border: none;
-        background: transparent;
       }
     }
   }

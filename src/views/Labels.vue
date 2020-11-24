@@ -20,7 +20,7 @@
           </div>
           <ol class="content">
             <li v-for="item in group.items" :key="item.id" @click="toEdit(item)">
-              <Icon :name="item.category"></Icon>
+              <Icon :name="item.category" :class="{'earn':item.type === '+' }"></Icon>
               <span>{{ item.category }}</span>
               <span class="amount">{{ item.amount }}</span>
             </li>
@@ -177,6 +177,10 @@ position: relative;
             height: 35px;
             color: white;
             background: $color-highlight;
+            &.earn{
+              background: #72c2ab;
+
+            }
           }
           .amount{
             position: absolute;
