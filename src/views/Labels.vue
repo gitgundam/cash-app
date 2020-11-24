@@ -2,7 +2,16 @@
   <div class="labels">
     <Layout class-prefix="layout-content">
       <Header classPrefix="header">
-        <h3 class="money">{{ money }}</h3>
+        <div class="money">
+          <span>¥{{income}}</span>
+          <span>收入</span>
+        </div>
+        <div class="split"></div>
+        <div class="money">
+          <span>¥{{expense}}</span>
+          <span>支出</span>
+        </div>
+
       </Header>
       <ul class="record">
         <li class="null" v-if="recordList[0] === undefined">
@@ -38,6 +47,13 @@ import {Component,} from 'vue-property-decorator';
 
 @Component
 export default class Labels extends Vue {
+  get expense(){
+    return this.recordList.filter((r: { type: string})=>r.type === '-').reduce((sum: any, item: { amount: any })=>sum+item.amount,0)
+  }
+
+  get income(){
+    return this.recordList.filter((r: { type: string})=>r.type === '+').reduce((sum: any, item: { amount: any })=>sum+item.amount,0)
+  }
 
   get money() {
     const a = [];
@@ -66,7 +82,6 @@ export default class Labels extends Vue {
   get recordList() {
     return this.$store.state.recordList;
   }
-
 
   get groupedList() {
     const {recordList} = this
@@ -99,7 +114,6 @@ export default class Labels extends Vue {
     this.$store.commit('fetchTags');
   }
 
-
   toEdit(item: any) {
     this.$router.push({
       name: 'edit',
@@ -118,7 +132,7 @@ export default class Labels extends Vue {
   ::v-deep .layout-content{
     display: flex;
     flex-direction: column;
-    height: calc(100% - 45px);
+    height: calc(100% - 45px - 20vh);
     margin-top: 20vh;
      .header {
        position: absolute;
@@ -127,17 +141,28 @@ export default class Labels extends Vue {
        width: 100%;
        height: 20vh;
        background: #5dcdbb;
-      .money {
-        margin-bottom: 5px;
-        margin-left: 10px;
-        color: white;
-        font-size: 25px;
-      }
+       display: flex;
+       justify-content: space-around;
+       align-items: flex-end;
+       >.money{
+         padding: 20px 0;
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         justify-content: center;
+         color: #fefffe;
+         flex: 1;
+       }
+       .split{
+         border: 1px solid #fefffe;
+         height: 40px;
+         width: 1px;
+         margin-bottom: 20px;
+       }
     }
   .record {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    overflow: auto;
+    align-items: center;
     .null{
       color: #a4a4a4;
       display: flex;
@@ -145,15 +170,13 @@ export default class Labels extends Vue {
       justify-content: center;
       align-items: center;
       width: 100%;
+      margin-top: 30vh;
       .icon{
         width: 100px;
         height: 100px;
       }
     }
     > li {
-      &:last-child{
-        margin-bottom: 45px;
-      }
       .title{
         background: #f7f8f8;
         display: flex;
