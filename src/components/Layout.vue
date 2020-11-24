@@ -17,7 +17,9 @@ export default {
 .layout-wrapper{
   margin: 0;
   padding: 0;
-  overflow: hidden;
-  height: calc(100vh - 45px);
+  overflow: auto;
+  height: 100vh;
+  width: 100%;
+  position: relative;
 }
 </style>

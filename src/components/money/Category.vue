@@ -38,7 +38,7 @@ export default class Category extends Vue {
 
  .category{
    height: calc(100% - 111px);
-   overflow: hidden;
+   overflow: auto;
    >ul{
      padding: 10px;
      display: flex;

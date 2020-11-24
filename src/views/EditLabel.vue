@@ -7,7 +7,7 @@
         <Icon name="删除" @click.native="remove" class="remove"></Icon>
       </Header>
       <ul class="content">
-        <li><span>类型</span>{{ record.category || 0}}</li>
+        <li><span>类型</span>{{ record.category}}</li>
         <li><span>金额</span>{{ record.amount }}</li>
         <li><span>日期</span>{{ record.createdAt | setTime(record.createdAt) }}</li>
         <li><span>备注</span>

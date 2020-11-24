@@ -100,8 +100,8 @@ export default class Types extends Vue {
 @import "~@/assets/style/helper.scss";
 
 .numberPad {
-  width: 100vw;
-  position:fixed;
+  position:absolute;
+  width: 100%;
   bottom: 0;
   left: 0;
   padding-bottom: 30px;

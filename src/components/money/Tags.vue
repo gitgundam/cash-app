@@ -75,7 +75,7 @@ export default class Tags extends Vue {
       display: flex;
       width: 60vw;
       flex-grow: 1;
-      overflow: hidden;
+      overflow: auto;
       align-items: center;
 
       > li {

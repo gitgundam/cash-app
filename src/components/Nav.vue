@@ -29,11 +29,11 @@ export default {
   nav {
     -webkit-tap-highlight-color:transparent;
     display: flex;
-    position: fixed;
+    position: absolute;
     bottom: 0;
     left: 0;
     background: #ededed;
-    width: 100vw;
+    width: 100%;
     height: 45px;
     font-size: 12px;
     box-shadow: 0 0 2px #b5b5b5;

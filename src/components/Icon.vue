@@ -22,6 +22,6 @@ try {
 <style scoped lang="scss">
 .icon {
   fill: currentColor;
-  overflow: hidden;
+  overflow: auto;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="labels">
-    <Layout>
+    <Layout class-prefix="layout-content">
       <Header classPrefix="header">
         <h3 class="money">{{ money }}</h3>
       </Header>
@@ -118,7 +118,7 @@ export default class Labels extends Vue {
   align-items: flex-end;
   justify-content: start;
   height: 10vh;
-  width: 100vw;
+  width: 100%;
 }
 </style>
 <style lang="scss" scoped>
@@ -126,7 +126,10 @@ export default class Labels extends Vue {
 
 .labels {
 position: relative;
-
+  ::v-deep .layout-content{
+    display: flex;
+    flex-direction: column;
+    height: calc(100% - 45px);
   .money {
     margin-bottom: 5px;
     margin-left: 10px;
@@ -162,6 +165,9 @@ position: relative;
           margin: 0 10px;
           border-bottom: 1px solid #dedede;
           position: relative;
+          &:last-child{
+            border: none;
+          }
 
           .icon {
             margin: 10px 5px;
@@ -197,6 +203,6 @@ position: relative;
       
     }
   }
-  
+  }
 }
 </style>
