@@ -20,6 +20,5 @@ export default {
   overflow: auto;
   height: 100vh;
   width: 100%;
-  position: relative;
 }
 </style>
