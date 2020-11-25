@@ -27,7 +27,7 @@ export default class Charts extends Vue {
 
 <style scoped lang="scss">
 .wrapper {
-  height: 400px;
+  height: 450px;
   border-bottom: 1px solid #dedede;
 }
 </style>
