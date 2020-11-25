@@ -85,7 +85,7 @@ export default class Statistics extends Vue {
     }
     const type =this.recordList.filter((item: {type: string})=>item.type === this.type)
     const newList =JSON.parse(JSON.stringify(type))
-    type  X = [{name: string;value: number}]
+    type  X = {name: string; value: number }[]
     const x: X = []
     for(let i=0;i<newList.length;i++){
       const current = newList[i]
