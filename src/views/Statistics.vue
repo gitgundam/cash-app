@@ -45,7 +45,8 @@ export default class Statistics extends Vue {
     return {
       title: {
         text: '收支记录',
-        left: 'center'
+        left: 'center',
+        top: '15'
       },
       tooltip: {
         trigger: 'item',
@@ -56,7 +57,7 @@ export default class Statistics extends Vue {
           name: '访问来源',
           type: 'pie',
           radius: ['40%', '70%'],
-          center: ['50%', '60%'],
+          center: ['50%', '50%'],
           data: this.recordCharts,
           emphasis: {
             itemStyle: {
@@ -128,6 +129,7 @@ export default class Statistics extends Vue {
     height: calc(100vh - 45px) ;
     display: flex;
     flex-direction:column ;
+    justify-content: start;
 
     .header{
       display: flex;
