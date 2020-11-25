@@ -2,7 +2,6 @@
   <div>
 
     <label class="notes">
-      {{now}}
       <span class="name">{{fileName}}</span>
       <input type='text' :placeholder="placeholder"
              :value = "value"
@@ -23,9 +22,6 @@ export default class Notes extends Vue {
   @Prop() placeholder?: string
   onValueChanged(value: string){
     this.$emit('update:value',value)
-  }
-  get now(){
-    return new Date().toLocaleString()
   }
 
 }
