@@ -80,10 +80,10 @@ export default class Statistics extends Vue {
   }
 
   get recordCharts(){
-    if(this.recordList.length === 0){
+    const type =this.recordList.filter((item: {type: string})=>item.type === this.type)
+    if(type.length === 0){
       return [{name: '暂无数据',value: 0}]
     }
-    const type =this.recordList.filter((item: {type: string})=>item.type === this.type)
     const newList =JSON.parse(JSON.stringify(type))
     type  X = {name: string; value: number }[]
     const x: X = []
@@ -102,6 +102,7 @@ export default class Statistics extends Vue {
   }
 
   get rank(){
+    console.log(this.recordCharts);
   return this.recordCharts.sort((a,b)=>b.value-a.value)
   }
 
