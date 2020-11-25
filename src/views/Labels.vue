@@ -111,7 +111,6 @@ export default class Labels extends Vue {
 
   beforeCreate() {
     this.$store.commit('fetchRecords');
-    this.$store.commit('fetchTags');
   }
 
   toEdit(item: any) {
@@ -196,14 +195,12 @@ export default class Labels extends Vue {
         }
       }
       .content {
-        &:last-child{
-        }
         > li {
           display: flex;
           justify-content: flex-start;
           align-items: center;
           margin: 0 10px;
-          border-bottom: 1px solid #dedede;
+          border-bottom: 1px solid #f7f7f7;
           position: relative;
           &:last-child{
             border: none;

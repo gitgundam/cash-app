@@ -1,8 +1,10 @@
 <template>
   <div>
+
     <label class="notes">
+      {{now}}
       <span class="name">{{fileName}}</span>
-      <input type="text" :placeholder="placeholder"
+      <input type='text' :placeholder="placeholder"
              :value = "value"
              @blur="onValueChanged($event.target.value)"
              @keyup.enter="onValueChanged($event.target.value)"/>
@@ -22,6 +24,9 @@ export default class Notes extends Vue {
   onValueChanged(value: string){
     this.$emit('update:value',value)
   }
+  get now(){
+    return new Date().toLocaleString()
+  }
 
 }
 </script>
@@ -34,7 +39,6 @@ export default class Notes extends Vue {
   padding-left: 16px;
   display: flex;
   align-items: center;
-
   > .name {
     padding-right: 16px;
   }

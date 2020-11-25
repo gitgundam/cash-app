@@ -50,12 +50,6 @@ export default class EditLabel extends Vue {
     this.$router.replace('/');
   }
 
-  updateName(name: string) {
-    const id = this.$route.params.id;
-    this.$store.state.tag.name = name;
-    this.$store.commit('updateTags', {id, name});
-  }
-
   remove() {
     const id = parseInt(this.$route.params.id);
     if (window.confirm('是否确认删除')) {

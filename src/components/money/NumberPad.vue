@@ -1,5 +1,6 @@
 <template>
   <div class="numberPad">
+
     <FormItem @update:value="changeValue"
               fileName="备注"
               placeholder="在这里输入备注"></FormItem>
@@ -111,7 +112,11 @@ export default class Types extends Vue {
   left: 0;
   padding-bottom: 30px;
   background: #3c414b;
-
+  .date{
+    border: 1px solid red;
+    width: 50px;
+    height: 20px;
+  }
   .buttons {
     @extend %clearFix;
 
