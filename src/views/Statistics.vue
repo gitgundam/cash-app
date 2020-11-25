@@ -57,7 +57,7 @@ export default class Statistics extends Vue {
           name: '访问来源',
           type: 'pie',
           radius: ['40%', '70%'],
-          center: ['50%', '50%'],
+          center: ['50%', '55%'],
           data: this.recordCharts,
           emphasis: {
             itemStyle: {
@@ -85,7 +85,8 @@ export default class Statistics extends Vue {
     }
     const type =this.recordList.filter((item: {type: string})=>item.type === this.type)
     const newList =JSON.parse(JSON.stringify(type))
-    const x = [{name: newList[0].category ,value:newList[0].amount }]
+    type  X = [{name: string;value: number}]
+    const x: X = []
     for(let i=0;i<newList.length;i++){
       const current = newList[i]
       const index = x.map(r=>r.name)
