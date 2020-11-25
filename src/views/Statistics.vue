@@ -11,13 +11,17 @@
         </ul>
       </Header>
       <Charts :options="options"></Charts>
-      <ul class="rank">
+      <ul class="rank" v-if="rank[0].name !== '暂无数据'">
+        <li class="title">
+          <h3>收支排行</h3>
+        </li>
         <li v-for="item in rank" :key="item.name">
           <Icon :name="item.name"></Icon>
           <span>{{item.name}}</span>
-          <span>{{item.value}}</span>
+          <span class="value">¥ {{item.value}}</span>
         </li>
       </ul>
+      <div class="no-data" v-else>暂无数据</div>
       <Nav/>
     </Layout>
   </div>
@@ -39,31 +43,28 @@ export default class Statistics extends Vue {
   type = '-'
   get options(){
     return {
+      title: {
+        text: '收支记录',
+        left: 'center'
+      },
       tooltip: {
         trigger: 'item',
-        formatter: '{a} <br/>{b}: {c} ({d}%)'
+        formatter: '{a} <br/>{b} : {c} ({d}%)'
       },
       series: [
         {
-          name: '收支记录',
+          name: '访问来源',
           type: 'pie',
-          radius: ['20%', '50%'],
-          avoidLabelOverlap: false,
-          label: {
-            show: false,
-            position: 'center'
-          },
+          radius: ['40%', '70%'],
+          center: ['50%', '60%'],
+          data: this.recordCharts,
           emphasis: {
-            label: {
-              show: true,
-              fontSize: 15,
-              fontWeight: 'bold'
+            itemStyle: {
+              shadowBlur: 10,
+              shadowOffsetX: 0,
+              shadowColor: 'rgba(0, 0, 0, 0.5)'
             }
-          },
-          labelLine: {
-            show: false
-          },
-          data: this.recordCharts
+          }
         }
       ]
     }
@@ -79,7 +80,7 @@ export default class Statistics extends Vue {
 
   get recordCharts(){
     if(this.recordList.length === 0){
-      alert('暂无数据')
+      return [{name: '暂无数据',value: 0}]
     }
     const type =this.recordList.filter((item: {type: string})=>item.type === this.type)
     const newList =JSON.parse(JSON.stringify(type))
@@ -99,7 +100,7 @@ export default class Statistics extends Vue {
   }
 
   get rank(){
-   return this.recordCharts.sort((a,b)=>b.value-a.value)
+  return this.recordCharts.sort((a,b)=>b.value-a.value)
   }
 
   selectType(value: string){
@@ -124,7 +125,6 @@ export default class Statistics extends Vue {
 
 .statistics{
   ::v-deep .layout-content{
-    border: 1px solid red;
     height: calc(100vh - 45px) ;
     display: flex;
     flex-direction:column ;
@@ -165,9 +165,41 @@ export default class Statistics extends Vue {
       }
     }
     .rank{
-      border: 1px solid red;
       overflow: auto;
 
+      .title{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        color: #a4a4a4;
+      }
+      >li{
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        margin: 0 10px;
+        border-bottom: 1px solid #f7f7f7;
+        position: relative;
+        .icon {
+          margin: 10px 10px;
+          padding: 5px;
+          border-radius: 50%;
+          width: 35px;
+          height: 35px;
+          color: white;
+          background: $color-highlight;
+        }
+        .value{
+          position: absolute;
+          right: 10px;
+        }
+      }
+    }
+    .no-data{
+      text-align: center;
+      width: 100%;
+      color: #a4a4a4;
     }
   }
 }
