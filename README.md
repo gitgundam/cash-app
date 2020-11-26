@@ -1,29 +1,15 @@
-# cash-app
+# 花菜记账
 
-## Project setup
-```
-npm install
-```
+## 启动方式
+``` javascript
+$ npm install
 
 ### Compiles and hot-reloads for development
-```
-npm run serve
-```
+$ npm run serve
 
 ### Compiles and minifies for production
-```
-npm run build
-```
-
-### Run your unit tests
-```
-npm run test:unit
+$ npm run build
+$ npm run start
 ```
 
-### Lints and fixes files
-```
-npm run lint
-```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
