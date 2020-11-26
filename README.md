@@ -1,7 +1,7 @@
 # 花菜记账
 
 ## 启动方式
-``` javascript
+``` bash
 $ npm install
 
 ### Compiles and hot-reloads for development
