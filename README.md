@@ -4,6 +4,7 @@
 >demo地址:[https://gitgundam.gitee.io/cash-app-website](https://gitgundam.gitee.io/cash-app-website)
 
 欢迎使用我的花菜记账
+
 花菜记账是一款使用Vuejs技术栈开发,基于**Vue,VueRouter,VueX,TypeScript**的单页面多组件应用.
 
 该项目功能由本人独立设计及实现,期间遇到了很多webpack,TypeScript相关的问题,解决过程记录在本人的博客中: [https://github.com/gitgundam/BLOG/issues](https://github.com/gitgundam/BLOG/issues)
